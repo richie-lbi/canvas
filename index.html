@@ -1,0 +1,24 @@
+<html>
+<head>
+</head>
+<body>
+
+	<canvas id="richie" width="500" height="300" />
+
+	<script type="text/javascript" src="scripts/jquery.min.js"></script>
+	<script type="text/javascript" src="http://code.createjs.com/createjs-2013.05.14.min.js"></script>
+	<script>
+
+		$(document).ready(function(){
+			var s = new createjs.Stage("richie");
+			var circle = new createjs.Shape();
+			circle.graphics.beginFill("wheat").drawCircle(0, 0, 20);
+			circle.x = 100;
+			circle.y = 100;
+			s.addChild(circle);
+			s.update();
+		});
+
+	</script>
+</body>
+</html>
