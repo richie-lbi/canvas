@@ -3,51 +3,73 @@
 </head>
 <body>
 
-	<canvas id="richie" width="500" height="300" />
+<button id="more-dots">More Dots</button>
+<button id="new-stuff">Faster</button>
+<br/>
+
+	<canvas id="richie" width="800" height="300" />
 
 	<script type="text/javascript" src="scripts/jquery-1.10.1.min.js"></script>
 	<script type="text/javascript" src="http://code.createjs.com/createjs-2013.05.14.min.js"></script>
 	<script>
 
+		
+	
 		var circle = {
 
-			speed: null,
-			direction: null,
-
+			me: null,
+			size: (Math.random(10) * 10) + 2,
+			limit: this.size / 2,
+		
 			init: function(){
-				circle = new createjs.Shape(),				
-				circle.graphics.beginFill("wheat").drawCircle(0, 0, 8);				
-				circle.x = Math.random(500) * 500;
-				circle.y = Math.random(300) * 300;	
-				return circle;
-			},
-
-
-			movement: function(){
-				//circle.x += 1;
-				//circle.y += 1;
-				console.log('movement');
+				me = new createjs.Shape(),				
+				me.graphics.beginFill("gold").drawCircle(0, 0, circle.size);				
+				me.x = Math.random(800) * 800;
+				me.y = Math.random(300) * 300;
+				me.speedX = Math.random(10) * 10;	
+				me.speedY = Math.random(10) * 10;					
+				return me;
 			}
 
 		}
 
 		var _stage;
+		var count = 1;
 
 		$(document).ready(function(){
 
+			$('#more-dots').bind('click',function(){
+				console.log('laura');
+				create();
+			});
+		
 			_stage = new createjs.Stage("richie");
 
-			for(var i = 0;i< 100;i++){
+			for(var i = 0;i< count;i++){
+				create();
+			}
+			
+			function create(){
 				var shape = new circle.init();
 				_stage.addChild(shape);
 			}
 
 			createjs.Ticker.addEventListener("tick", tick);
-			function tick(e) { 
+			function tick() { 
 				for(var i = 0;i< _stage.children.length;i++){
 					var circ = _stage.children[i];
-					// circ.movement();
-					console.log('cicr');
+					
+					if(circ.x > 800 || circ.x < 0){
+						circ.speedX = -circ.speedX;
+					}
+					
+					if(circ.y > 300 || circ.y < 0){
+						circ.speedY = -circ.speedY;
+					}
+					
+					circ.x += circ.speedX;
+					circ.y += circ.speedY;
+					
 				}
 				_stage.update();
 			 }
