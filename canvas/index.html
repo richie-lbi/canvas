@@ -4,22 +4,20 @@
 <body>
 
 <button id="more-dots">More Dots</button>
-<button id="new-stuff">Faster</button>
 <br/>
 
 	<canvas id="richie" width="800" height="300" />
 
 	<script type="text/javascript" src="scripts/jquery-1.10.1.min.js"></script>
+	<script type="text/javascript" src="scripts/kinetic-v4.5.3.min.js"></script>
 	<script type="text/javascript" src="http://code.createjs.com/createjs-2013.05.14.min.js"></script>
 	<script>
-
-		
 	
 		var circle = {
 
 			me: null,
-			size: (Math.random(10) * 10) + 2,
-			limit: this.size / 2,
+			size: (Math.random(6) * 6) + 4,
+			limit: this.size / 5,
 		
 			init: function(){
 				me = new createjs.Shape(),				
@@ -33,31 +31,30 @@
 
 		}
 
-		var _stage;
-		var count = 1;
-
-		$(document).ready(function(){
-
-			$('#more-dots').bind('click',function(){
-				console.log('laura');
-				create();
-			});
+		var demo = {
 		
-			_stage = new createjs.Stage("richie");
-
-			for(var i = 0;i< count;i++){
-				create();
-			}
+			canvas: new createjs.Stage("richie"),
+			ballCount: 1,
+			init: function(){
+				demo.events();
+				for(var i = 0;i< demo.ballCount;i++){
+					demo.create();
+				}
+				demo.animate();
+			},
 			
-			function create(){
+			create: function(){
 				var shape = new circle.init();
-				_stage.addChild(shape);
-			}
-
-			createjs.Ticker.addEventListener("tick", tick);
-			function tick() { 
-				for(var i = 0;i< _stage.children.length;i++){
-					var circ = _stage.children[i];
+				demo.canvas.addChild(shape);
+			},
+			
+			animate: function(){
+				createjs.Ticker.addEventListener("tick", demo.tick);
+			},
+		
+			tick: function() { 
+				for(var i = 0;i< demo.canvas.children.length;i++){
+					var circ = demo.canvas.children[i];
 					
 					if(circ.x > 800 || circ.x < 0){
 						circ.speedX = -circ.speedX;
@@ -71,8 +68,20 @@
 					circ.y += circ.speedY;
 					
 				}
-				_stage.update();
-			 }
+				demo.canvas.update();
+			 },
+		
+			events: function(){
+				$('#more-dots').bind('click',function(){
+					demo.create();
+				});
+			}
+			
+		}
+		
+		$(document).ready(function(){
+
+			demo.init();
 
 		});
 
