@@ -12,24 +12,42 @@
 	<script type="text/javascript" src="http://code.createjs.com/createjs-2013.05.14.min.js"></script>
 	<script>
 
+		var speed = 2;
+	
 		$(document).ready(function(){
 
 			var stage = new createjs.Stage("easel");
 			var con = new createjs.Container();
-
-			var shape = new createjs.Shape();
-			shape.graphics.beginFill("#e8e8e8").drawRect(0, 0, 20, 60);
-
+			con.x = 100;
+			
+			var shape1 = new createjs.Shape();
+			shape1.graphics.beginFill("#ffffff").drawRect(-20, -20, 40, 40);
+			shape1.x = 100;
+			shape1.y = 100;
+			
+			
 			var shape2 = new createjs.Shape();
-			shape2.graphics.beginFill("#e8e8e8").drawRect(0, 0, 60, 60);
+			shape2.graphics.beginFill("#e8e8e8").drawRect(-30, -30, 60, 60);
 			shape2.x = 100;
-
-			con.addChild(shape, shape2);
-			con.rotation = 2;
+			shape2.y = 100;
+			
+			con.addChild(shape2, shape1);
 
 			stage.addChild(con);
-
 			stage.update();
+			
+			createjs.Ticker.addEventListener("tick", ff);
+			
+			function ff(){
+				shape1.rotation -= 1;
+				shape2.rotation += 2;
+				if(con.x > 700 || con.x < 100){
+					speed = -speed;
+					console.log('matched');
+				}
+				con.x += speed;
+				stage.update();
+			}
 
 		});
 
