@@ -1,0 +1,38 @@
+<html>
+<head>
+</head>
+<body>
+<h1>EaselJs</h1>
+
+<p>Container - Nestable display list</p>
+
+<canvas id="easel" width="800" height="300" />
+
+	<script type="text/javascript" src="scripts/jquery-1.10.1.min.js"></script>
+	<script type="text/javascript" src="http://code.createjs.com/createjs-2013.05.14.min.js"></script>
+	<script>
+
+		$(document).ready(function(){
+
+			var stage = new createjs.Stage("easel");
+			var con = new createjs.Container();
+
+			var shape = new createjs.Shape();
+			shape.graphics.beginFill("#e8e8e8").drawRect(0, 0, 20, 60);
+
+			var shape2 = new createjs.Shape();
+			shape2.graphics.beginFill("#e8e8e8").drawRect(0, 0, 60, 60);
+			shape2.x = 100;
+
+			con.addChild(shape, shape2);
+			con.rotation = 2;
+
+			stage.addChild(con);
+
+			stage.update();
+
+		});
+
+	</script>
+</body>
+</html>
