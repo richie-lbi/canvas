@@ -8,7 +8,7 @@
 
 <p>http://www.createjs.com/Docs/EaselJS/classes/Shape.html</p>
 
-<canvas id="easel" width="800" height="300" />
+<canvas id="easel-canvas" width="800" height="300" />
 
 	<script type="text/javascript" src="scripts/jquery-1.10.1.min.js"></script>
 	<script type="text/javascript" src="http://code.createjs.com/createjs-2013.05.14.min.js"></script>
@@ -19,7 +19,7 @@
 	
 		$(document).ready(function(){
 
-			var stage = new createjs.Stage("easel");
+			var stage = new createjs.Stage("easel-canvas");
 			var con = new createjs.Container();
 			con.x = 100;
 			
@@ -34,16 +34,16 @@
 			shape2.x = 100;
 			shape2.y = 100;
 			
-			//con.addChild(shape2, shape1);
+			con.addChild(shape2, shape1);
 
-			//stage.addChild(con);
+			stage.addChild(con);
 			
 			createjs.Ticker.addEventListener("tick", animate);
 
 			var controlPoint = new createjs.Graphics();
 			    controlPoint.setStrokeStyle(1);
 			    controlPoint.beginStroke('black');
-			    controlPoint.beginFill('red');
+			    controlPoint.beginFill('#666');
 			    controlPoint.drawCircle(0,0,8);
 
 			var cp1 = new createjs.Shape(controlPoint);
@@ -56,9 +56,9 @@
 
 			var freeform = new createjs.Graphics();
 				freeform.moveTo(0,0);
-				freeform.s('red');
+				freeform.s('#666');
 				freeform.f('wheat');
-				freeform.bt(cp1.x, cp1.y, cp2.x, cp2.y, 500, 0);
+				freeform.bt(cp1.x, cp1.y, cp2.x, cp2.y, 400, 0);
 				freeform.lt(0,0);
 
 			var bez = new createjs.Shape(freeform);
@@ -70,7 +70,7 @@
 			function animate(){
 				shape1.rotation -= 1;
 				shape2.rotation += 2;
-				if(con.x > 700 || con.x < 100){
+				if(con.x > 650 || con.x < 100){
 					speed = -speed;
 				}
 				con.x += speed;
