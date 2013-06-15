@@ -8,35 +8,56 @@
 
 <p>http://www.createjs.com/Docs/EaselJS/classes/Shape.html</p>
 
+<ul>
+	<li>Sublime Editor Easel autocomplete: https://github.com/olsn/SublimeText2-EaselJS-Completion</li>
+	<li>Collision Dection plugin: https://github.com/olsn/Collision-Detection-for-EaselJS</li>
+</ul>
+
 <canvas id="easel-canvas" width="800" height="300" />
 
 	<script type="text/javascript" src="scripts/jquery-1.10.1.min.js"></script>
 	<script type="text/javascript" src="http://code.createjs.com/createjs-2013.05.14.min.js"></script>
+	<script type="text/javascript" src="scripts/ndgmr.Collision.js"></script>
 	<script>
 
 		var speed = 5;
-		
+		var ySpeed = 2;
 	
 		$(document).ready(function(){
 
 			var stage = new createjs.Stage("easel-canvas");
+			
+			/* Hit Test */
+			var hitTestContainer = new createjs.Container();
+			var collide1 = new createjs.Bitmap("images/weird.png");
+			var collide2 = new createjs.Bitmap("images/circ.png");
+			collide1.regX = 25;
+			collide1.regY = 25;
+			collide1.y = 140;
+			collide2.y = 210;
+			//var collide1 = new createjs.Shape();
+			//collide1.graphics.beginFill("#ff0000").dc(0, 230, 70);
+			
+			//var collide2 = new createjs.Shape();
+			//collide1.graphics.beginFill("cyan").dc(0, 170, 70);
+			
+			hitTestContainer.addChild(collide1, collide2);
+			
+			/* End Test */
+			
 			var con = new createjs.Container();
 			con.x = 100;
+			hitTestContainer.x = 600;
 			
 			var shape1 = new createjs.Shape();
-			shape1.graphics.beginFill("#ffffff").drawRect(-20, -20, 40, 40);
-			shape1.x = 100;
-			shape1.y = 100;
-			
+			shape1.graphics.beginFill("#ffffff").dr(-20, -20, 40, 40);
 			
 			var shape2 = new createjs.Shape();
-			shape2.graphics.beginFill("#e8e8e8").drawRect(-30, -30, 60, 60);
-			shape2.x = 100;
-			shape2.y = 100;
+			shape2.graphics.beginFill("#e8e8e8").dr(-30, -30, 60, 60);
 			
 			con.addChild(shape2, shape1);
 
-			stage.addChild(con);
+			stage.addChild(con,hitTestContainer);
 			
 			createjs.Ticker.addEventListener("tick", animate);
 
@@ -70,11 +91,23 @@
 			function animate(){
 				shape1.rotation -= 1;
 				shape2.rotation += 2;
+				
 				if(con.x > 650 || con.x < 100){
 					speed = -speed;
 				}
 				con.x += speed;
+				
+				if(collide1.y > 170 || collide1.y < 100){
+					ySpeed = -ySpeed;
+				}
+				collide1.y += ySpeed;
+				collide2.y -= ySpeed;
 				stage.update();
+				
+				var intersection = ndgmr.checkRectCollision(collide1, collide2, 0.74);
+				if(intersection != null) collide1.rotation += speed;
+				console.log('intersection ',intersection, collide1.y);
+				
 			}
 
 		});
