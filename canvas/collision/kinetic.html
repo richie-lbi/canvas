@@ -26,7 +26,7 @@
 		
 		$(document).ready(function(){
 			
-			var rain, noBitmapLayer, stage;
+			var rain, bitmapBackgroundLayer, stage;
 
 			stage = new Kinetic.Stage({
 				container:'kinetic-canvas',
@@ -34,12 +34,12 @@
 				height: 300
 			});
 
-			function rainDrop(){
+			function rainDrop(xPos, colour){
 				var _y = -(Math.random() * 600);
 				var rainDrop = new Kinetic.Circle({
 					radius: 10,
-					x: (Math.random() * 400) + 400,
-					fill: 'blue',
+					x: xPos,
+					fill: colour,
 					speed: (Math.random() * 2) + 2,
 					yReset: _y,
 					y: _y
@@ -48,32 +48,50 @@
 			}
 
 			rain = 50;
+			bitmapBackgroundLayer = new Kinetic.Layer();
 			noBitmapLayer = new Kinetic.Layer();
 
 			for(var i = 0;i < rain; i++){
-				noBitmapLayer.add(rainDrop());
+				bitmapBackgroundLayer.add(rainDrop(((Math.random() * 400) + 400),'blue'));
+				noBitmapLayer.add(rainDrop(((Math.random() * 400)),'cyan'));
 			}		
 
-			stage.add(noBitmapLayer);
+			stage.add(bitmapBackgroundLayer).add(noBitmapLayer);
 
 			var imageObj = new Image();
 			imageObj.onload = function() {
 				var rocks = new Kinetic.Image({
-				  x: 0,
+				  x: 400,
 				  y: 220,
 				  image: imageObj
 				});
 
-				// add the shape to the noBitmapLayer
-				noBitmapLayer.add(rocks);
+				// add the shape to the bitmapBackgroundLayer
+				bitmapBackgroundLayer.add(rocks);
 
 			};
 			imageObj.src = 'images/rocks.png';
+			
+			var rocksNoBitmap = new Kinetic.Shape({
+	        drawFunc: function(canvas) {
+	          var context = canvas.getContext();
+	          context.beginPath();
+	          context.moveTo(0, 260);
+	          context.lineTo(420, 80);
+	          context.quadraticCurveTo(300, 100, 260, 170);
+	          context.closePath();
+	          canvas.fillStroke(this);
+	        },
+	        fill: '#00D2FF'
+	      });
+
+			noBitmapLayer.add(rocksNoBitmap);
 
 			var anim = new Kinetic.Animation(function(frame) {
+				update(bitmapBackgroundLayer);
 				update(noBitmapLayer);
 				
-			}, noBitmapLayer);
+			}, [bitmapBackgroundLayer, noBitmapLayer]);
 
 			anim.start();
 
@@ -92,7 +110,6 @@
 
 					if(doObjectsCollide(rain, rainDrop[rainDrop.length-1])){
 						rain.setY(rain.getAttr('yReset'));
-						// console.log('reset');
 					};
 				  
 				}
