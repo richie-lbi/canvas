@@ -1,0 +1,59 @@
+<html>
+<head>
+</head>
+<body>
+<h1>Collision Test</h1>
+
+<canvas id="easel-canvas" width="800" height="300" />
+	<script type="text/javascript" src="../scripts/jquery-1.10.1.min.js"></script>
+	<script type="text/javascript" src="http://code.createjs.com/createjs-2013.05.14.min.js"></script>
+	<script type="text/javascript" src="../scripts/ndgmr.Collision.js"></script>
+	<script>
+
+		$(document).ready(function(){
+			
+			var stage = new createjs.Stage("easel-canvas");
+
+			var rocks = new createjs.Bitmap("images/rocks.png");
+			var rainBit = new createjs.Bitmap("images/rain.png");
+
+			stage.addChild(rocks);
+
+			function rainDrop(){
+				var rainDrop = rainBit.clone(true);
+				rainDrop.yReset = -(Math.random() * 600);
+				rainDrop.x = (Math.random() * 800);
+				rainDrop.y = rainDrop.yReset;
+				// rainDrop.graphics.beginFill("wheat").dc((Math.random() * 800), rainDrop.yReset, 5);
+				rainDrop.speed = (Math.random() * 2) + 2;
+				return rainDrop;
+			}
+
+			createjs.Ticker.addEventListener("tick", animate);
+			var rain = 100;
+
+			for(var i = 0;i < rain; i++){
+				stage.addChild(rainDrop(), rocks);
+			}
+
+			function animate(e){
+
+				for(var i = 0; i < stage.children.length; i++){
+					var e = stage.children[i];
+					var intersection = ndgmr.checkPixelCollision(rocks, e, 0.75);
+					if(intersection) e.y  = e.yReset;
+					if(e.y > (-e.yReset + 300)){
+						e.y = e.yReset;
+					}
+					e.y += e.speed;
+				}
+				rocks.y = 220;
+				stage.update();
+				
+			}
+
+		});
+
+	</script>
+</body>
+</html>
