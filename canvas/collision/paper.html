@@ -44,40 +44,7 @@
 			circlePath.fillColor = 'black';
 			circlePath.opacity = 0.2;
 
-			var pathy = new Path();
-			pathy.strokeColor = 'red';
-			pathy.add(new Point(30, 75)); 
-			pathy.add(new Point(30, 25)); 
-			pathy.add(new Point(80, 25));
-			pathy.add(new Point(80, 75));
-			pathy.closed = true;
-			pathy.smooth();
-
-
-
-
-		var amount = 8;
-		var height = 50;
-		// Create a new path and style it:
-		var richard = new Path({
-		    // 80% black:
-		    strokeColor: [0.8],
-		    strokeWidth: 10,
-		    strokeCap: 'square'
-		});
-
-		// Add 5 segment points to the path spread out
-		// over the width of the view:
-		for (var i = 0; i <= amount; i++) {
-		    richard.add(new Point(i / amount, 1) * view.size);
-		}
-richard.smooth();
-
-			// stage level click
-			function onMouseDown(event) {
-			    console.log('paper: ',event);
-			}
-
+			var p = new Point((Math.random() * 800, 200));
 
 			var speed = 2;
 			function onFrame(event) {
@@ -88,17 +55,6 @@ richard.smooth();
     				speed = -speed;
     			}
     			circ.position.x += speed;
-
-			    for (var i = 0; i <= amount; i++) {
-			        var segment = richard.segments[i];
-
-			        // A cylic value between -1 and 1
-			        var sinus = Math.sin(event.time * 9 + (i * 6));
-			        console.log('sin: ',sinus);
-			        
-			        // Change the y position of the segment point:
-			        segment.point.y = sinus * height + 100;
-			    }
 
 			}
 
