@@ -8,6 +8,8 @@
 
 <ol>
 	<li>http://www.netmagazine.com/tutorials/use-paperjs-create-html5-interactive-vector-animations </li>
+	<li>Paperscript won't pollute the global namespace</li>
+	<li>Paper supports object level events</li>
 </oL>
 
 	<canvas id="paper-canvas" width="800" height="300" />
@@ -51,13 +53,13 @@
 			pathy.add(new Point(80, 25));
 			pathy.add(new Point(80, 75));
 			pathy.closed = true;
-			pathy.smooth();
+			// pathy.smooth();
 
 
 
 
 		var amount = 8;
-		var height = 50;
+		var height = 100;
 		// Create a new path and style it:
 		var richard = new Path({
 		    // 80% black:
@@ -71,7 +73,7 @@
 		for (var i = 0; i <= amount; i++) {
 		    richard.add(new Point(i / amount, 1) * view.size);
 		}
-richard.smooth();
+		richard.smooth();
 
 			// stage level click
 			function onMouseDown(event) {
@@ -93,7 +95,7 @@ richard.smooth();
 			        var segment = richard.segments[i];
 
 			        // A cylic value between -1 and 1
-			        var sinus = Math.sin(event.time * 9 + (i * 6));
+			        var sinus = Math.sin(event.time * 2 + (i * 3));
 			        console.log('sin: ',sinus);
 			        
 			        // Change the y position of the segment point:
