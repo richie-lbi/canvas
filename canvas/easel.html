@@ -104,6 +104,7 @@
 				collide2.y -= ySpeed;
 				stage.update();
 				
+				// var intersection = ndgmr.checkPixelCollision(collide1, collide2, 0.74);
 				var intersection = ndgmr.checkRectCollision(collide1, collide2, 0.74);
 				if(intersection != null) collide1.rotation += speed;
 				console.log('intersection ',intersection, collide1.y);
