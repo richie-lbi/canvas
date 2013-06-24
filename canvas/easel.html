@@ -4,6 +4,11 @@
 <body>
 <h1>EaselJs</h1>
 
+<ol>
+	<li>Uses DIV element instead of CANVAS</li>
+	<li>How does Easel animate - a ticker class which fires a call back</li>
+</ol>
+
 <p>Container - Nestable display list</p>
 
 <p>http://www.createjs.com/Docs/EaselJS/classes/Shape.html</p>
@@ -104,10 +109,15 @@
 				collide2.y -= ySpeed;
 				stage.update();
 				
+<<<<<<< HEAD
 				// var intersection = ndgmr.checkPixelCollision(collide1, collide2, 0.74);
 				var intersection = ndgmr.checkRectCollision(collide1, collide2, 0.74);
 				if(intersection != null) collide1.rotation += speed;
 				console.log('intersection ',intersection, collide1.y);
+=======
+				var intersection = ndgmr.checkPixelCollision(collide1, collide2, 0.74);
+				if(intersection) collide1.rotation += speed;
+>>>>>>> 59c1aeff85a103775e424967f0b0438bffd2d39c
 				
 			}
 

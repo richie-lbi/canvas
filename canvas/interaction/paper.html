@@ -1,0 +1,33 @@
+<html>
+<head>
+</head>
+<body>
+
+<h1>Paper.JS</h1>
+<br/>
+
+<ol>
+	<li>http://www.netmagazine.com/tutorials/use-paperjs-create-html5-interactive-vector-animations </li>
+</oL>
+
+	<canvas id="paper-canvas" width="800" height="300" />
+
+	<script type="text/javascript" src="../scripts/jquery-1.10.1.min.js"></script>
+	<script type="text/javascript" src="../scripts/paper-min.js"></script>
+	<script type="text/paperscript" canvas="paper-canvas">
+
+	// Create a new path once, when the script is executed:
+	var myPath = new Path();
+	myPath.strokeColor = 'black';
+
+	// This function is called whenever the user
+	// clicks the mouse in the view:
+	function onMouseDown(event) {
+		// Add a segment to the path at the position of the mouse:
+		myPath.add(event.point);
+		myPath.smooth();
+	}
+			
+	</script>
+</body>
+</html>
