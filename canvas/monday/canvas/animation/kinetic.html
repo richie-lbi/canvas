@@ -1,0 +1,119 @@
+<html>
+<head>
+	<style>
+		div#kinetic-canvas{
+			background: black;
+			width: 300px;
+			height: 800px;
+		}
+	</style>
+</head>
+<body>
+
+<h1>KineticJS</h1>
+
+<div id="kinetic-canvas"></div>
+
+	<script type="text/javascript" src="../scripts/jquery-1.10.1.min.js"></script>
+	<script type="text/javascript" src="http://d3lp1msu2r81bx.cloudfront.net/kjs/js/lib/kinetic-v4.5.4.min.js"></script>
+	<script>
+		
+		var sWid = 300,
+			sHei = 800;
+
+		var circle = {
+
+			me: null,
+			size: (Math.random(6) * 6) + 4,
+			limit: this.size / 5,
+			sWidth: 800,
+			sHeight: 300,
+		
+			init: function(){
+
+				var ball = new Kinetic.Circle({
+					radius: 20,
+					x: (Math.random(sWid) * (sWid - 30)) + 15,
+					y: (Math.random(sHei) * (sHei - 30)) + 15,
+					speedX: Math.random(3) * 10,	
+					speedY: Math.random(3) * 10,	
+					fill: 'white'
+				});
+
+				return ball;
+
+			}
+
+		}
+
+		var demo = {
+		
+			canvas: new Kinetic.Stage({
+				container:'kinetic-canvas',
+				width: sWid,
+				height: sHei
+			}),
+
+			layer: new Kinetic.Layer(),
+			ballCount: 30,
+			init: function(){
+				
+
+				for(var i = 0;i< demo.ballCount;i++){
+					demo.create();
+				}
+				demo.canvas.add(demo.layer);
+				demo.animate();
+				
+			},
+			
+			create: function(){
+
+				var shape = new circle.init();
+				demo.layer.add(shape);
+
+			},
+			
+			animate: function(){
+				var anim = new Kinetic.Animation(function(frame) {
+					demo.moveThings();
+				}, [demo.layer]);
+				anim.start();
+			},
+
+			moveThings: function(){
+
+				var rainDrop = demo.layer.getChildren();
+
+				for(var n = 0; n < rainDrop.length; n++) {
+					
+					var rain = rainDrop[n];
+
+					if(rain.getAttr('x') > (sWid) || rain.getAttr('x') < (0)){
+						rain.setAttr('speedX', -rain.getAttr('speedX'));
+					}
+					
+					if(rain.getAttr('y') > (sHei) || rain.getAttr('y') < (0)){
+						rain.setAttr('speedY', -rain.getAttr('speedY'));
+					}
+
+					rain.setY(rain.getAttr('y') + rain.getAttr('speedY'));
+					rain.setX(rain.getAttr('x') + rain.getAttr('speedX'));
+
+				}
+
+			}
+			
+		}
+
+
+
+		$(document).ready(function(){
+			
+			demo.init();
+
+		});
+		
+	</script>
+</body>
+</html>

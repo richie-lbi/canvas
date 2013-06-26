@@ -1,0 +1,200 @@
+<html>
+<head>
+	<style>
+		canvas{
+			background: black;
+		}
+	</style>
+</head>
+<body>
+
+<h1>Paper.JS</h1>
+
+	<canvas id="paper-canvas" width="300" height="800" />
+
+	<script type="text/javascript" src="../scripts/jquery-1.10.1.min.js"></script>
+	<script type="text/javascript" src="../scripts/paper-min.js"></script>
+	<script type="text/paperscript" canvas="paper-canvas">
+
+		var sWid = 300,
+			sHei = 800;
+
+
+		function onFrame(event) {
+
+			for (var i = 0; i < project.activeLayer.children.length; i++) {
+				
+					var circ = project.activeLayer.children[i];
+					if(circ.position.x > (sWid - circ.size) || circ.position.x < (0 + circ.size)){
+						circ.speedX = -circ.speedX;
+					}
+
+					if(circ.position.y > (sHei - circ.size) || circ.position.y < (0 + circ.size)){
+						circ.speedY = -circ.speedY;
+					}
+					
+					circ.position.x += circ.speedX;
+					circ.position.y += circ.speedY;
+			}
+
+		}
+
+
+		var circle = {
+
+			me: null,
+			size: (Math.random(6) * 6) + 4,
+			limit: this.size / 5,
+			sWidth: sWid,
+			sHeight: sHei,
+		
+			init: function(){
+				var circ = new Path.Circle([((Math.random(sWid) * (sWid - 30)) + 15),((Math.random(sHei) * (sHei - 30)) + 15)], circle.size);
+				circ.fillColor = 'white';
+				circ.speedX = Math.random(3) * 10;	
+				circ.speedY = Math.random(3) * 10;
+				circ.size = circle.size;		
+				return circ;
+			}
+
+		}
+
+		var demo = {
+		
+			canvas: null,
+			ballCount: 30,
+			init: function(){
+				for(var i = 0;i< demo.ballCount;i++){
+					demo.create();
+				}
+				demo.animate();
+			},
+			
+			create: function(){
+				var shape = new circle.init();
+			},
+			
+			animate: function(){
+
+				console.log('hello world');
+
+			},
+		
+			tick: function() { 
+				/*
+				for(var i = 0;i< demo.canvas.children.length;i++){
+					var circ = demo.canvas.children[i];
+
+					if(circ.x > (sWid - circ.size) || circ.x < (0 + circ.size)){
+						circ.speedX = -circ.speedX;
+					}
+					
+					if(circ.y > (sHei - circ.size) || circ.y < (0 + circ.size)){
+						circ.speedY = -circ.speedY;
+					}
+					
+					circ.x += circ.speedX;
+					circ.y += circ.speedY;
+					
+				}
+
+				demo.canvas.update();
+				*/
+			 }
+			
+		}
+
+		$(document).ready(function(){
+
+			demo.init();
+
+		});
+
+		//$(document).ready(function(){
+
+/*
+		    // Create a Paper.js Path to draw a line into it:
+		    var path = new Path();
+		    // Give the stroke a color
+		    path.strokeColor = 'black';
+		    var start = new Point(100, 100);
+		    // Move to start and draw a line from there
+		    path.moveTo(start);
+		    // Note the plus operator on Point objects.
+		    // PaperScript does that for us, and much more!
+		    path.lineTo(start + [ 100, -50 ]);
+		    path.lineTo(start + [ 80, 110 ]);
+		    path.closePath();
+		    path.fillColor = 'cyan';
+
+			var rect = new Path.Rectangle([100, 80], [50, 90]);
+			rect.fillColor = 'lime';
+			rect.strokeColor = 'black';
+			rect.rotate(45);
+
+			var circ = new Path.Circle(rect.position, 29);
+			circ.strokeColor = 'black';
+
+			var circlePath = new Path.Circle(new Point(50, 50), 15);
+			circlePath.fillColor = 'black';
+			circlePath.opacity = 0.2;
+
+			var pathy = new Path();
+			pathy.strokeColor = 'red';
+			pathy.add(new Point(30, 75)); 
+			pathy.add(new Point(30, 25)); 
+			pathy.add(new Point(80, 25));
+			pathy.add(new Point(80, 75));
+			pathy.closed = true;
+			// pathy.smooth();
+
+		var amount = 8;
+		var height = 100;
+		// Create a new path and style it:
+		var richard = new Path({
+		    // 80% black:
+		    strokeColor: [0.8],
+		    strokeWidth: 10,
+		    strokeCap: 'square'
+		});
+
+		// Add 5 segment points to the path spread out
+		// over the width of the view:
+		for (var i = 0; i <= amount; i++) {
+		    richard.add(new Point(i / amount, 1) * view.size);
+		}
+		richard.smooth();
+
+			// stage level click
+			function onMouseDown(event) {
+			    console.log('paper: ',event);
+			}
+
+
+			var speed = 2;
+			function onFrame(event) {
+
+    			rect.rotate(3);
+    			
+    			if(circ.position.x > 750 || circ.position.x < 50){
+    				speed = -speed;
+    			}
+    			circ.position.x += speed;
+
+			    for (var i = 0; i <= amount; i++) {
+			        var segment = richard.segments[i];
+
+			        // A cylic value between -1 and 1
+			        var sinus = Math.sin(event.time * 2 + (i * 3));
+			        console.log('sin: ',sinus);
+			        
+			        // Change the y position of the segment point:
+			        segment.point.y = sinus * height + 100;
+			    }
+
+			}
+*/
+
+	</script>
+</body>
+</html>

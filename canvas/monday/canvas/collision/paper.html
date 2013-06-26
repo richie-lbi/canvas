@@ -1,0 +1,64 @@
+<html>
+<head>
+</head>
+<body>
+
+<h1>Paper.JS</h1>
+<br/>
+
+<ol>
+	<li>http://www.netmagazine.com/tutorials/use-paperjs-create-html5-interactive-vector-animations </li>
+</oL>
+
+	<canvas id="paper-canvas" width="800" height="300" />
+
+	<script type="text/javascript" src="scripts/jquery-1.10.1.min.js"></script>
+	<script type="text/javascript" src="scripts/paper-min.js"></script>
+	<script type="text/paperscript" canvas="paper-canvas">
+		//$(document).ready(function(){
+
+
+		    // Create a Paper.js Path to draw a line into it:
+		    var path = new Path();
+		    // Give the stroke a color
+		    path.strokeColor = 'black';
+		    var start = new Point(100, 100);
+		    // Move to start and draw a line from there
+		    path.moveTo(start);
+		    // Note the plus operator on Point objects.
+		    // PaperScript does that for us, and much more!
+		    path.lineTo(start + [ 100, -50 ]);
+		    path.lineTo(start + [ 80, 110 ]);
+		    path.closePath();
+		    path.fillColor = 'cyan';
+
+			var rect = new Path.Rectangle([100, 80], [50, 90]);
+			rect.fillColor = 'lime';
+			rect.strokeColor = 'black';
+			rect.rotate(45);
+
+			var circ = new Path.Circle(rect.position, 29);
+			circ.strokeColor = 'black';
+
+			var circlePath = new Path.Circle(new Point(50, 50), 15);
+			circlePath.fillColor = 'black';
+			circlePath.opacity = 0.2;
+
+			var p = new Point((Math.random() * 800, 200));
+
+			var speed = 2;
+			function onFrame(event) {
+
+    			rect.rotate(3);
+    			
+    			if(circ.position.x > 750 || circ.position.x < 50){
+    				speed = -speed;
+    			}
+    			circ.position.x += speed;
+
+			}
+
+
+	</script>
+</body>
+</html>
