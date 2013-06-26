@@ -1,0 +1,121 @@
+<html>
+<head>
+</head>
+<body>
+<h1>EaselJs</h1>
+
+<ol>
+	<li>Uses DIV element instead of CANVAS</li>
+	<li>How does Easel animate - a ticker class which fires a call back</li>
+</ol>
+
+<p>Container - Nestable display list</p>
+
+<p>http://www.createjs.com/Docs/EaselJS/classes/Shape.html</p>
+
+<ul>
+	<li>Sublime Editor Easel autocomplete: https://github.com/olsn/SublimeText2-EaselJS-Completion</li>
+	<li>Collision Dection plugin: https://github.com/olsn/Collision-Detection-for-EaselJS</li>
+</ul>
+
+<canvas id="easel-canvas" width="800" height="300" />
+
+	<script type="text/javascript" src="scripts/jquery-1.10.1.min.js"></script>
+	<script type="text/javascript" src="http://code.createjs.com/createjs-2013.05.14.min.js"></script>
+	<script type="text/javascript" src="scripts/ndgmr.Collision.js"></script>
+	<script>
+
+		var speed = 5;
+		var ySpeed = 2;
+
+		$(document).ready(function(){
+
+			var stage = new createjs.Stage("easel-canvas");
+
+			/* Hit Test */
+			var hitTestContainer = new createjs.Container();
+			var collide1 = new createjs.Bitmap("images/weird.png");
+			var collide2 = new createjs.Bitmap("images/circ.png");
+			collide1.regX = 25;
+			collide1.regY = 25;
+			collide1.y = 140;
+			collide2.y = 210;
+			//var collide1 = new createjs.Shape();
+			//collide1.graphics.beginFill("#ff0000").dc(0, 230, 70);
+
+			//var collide2 = new createjs.Shape();
+			//collide1.graphics.beginFill("cyan").dc(0, 170, 70);
+
+			hitTestContainer.addChild(collide1, collide2);
+
+			/* End Test */
+
+			var con = new createjs.Container();
+			con.x = 100;
+			hitTestContainer.x = 600;
+
+			var shape1 = new createjs.Shape();
+			shape1.graphics.beginFill("#ffffff").dr(-20, -20, 40, 40);
+
+			var shape2 = new createjs.Shape();
+			shape2.graphics.beginFill("#e8e8e8").dr(-30, -30, 60, 60);
+
+			con.addChild(shape2, shape1);
+
+			stage.addChild(con,hitTestContainer);
+
+			createjs.Ticker.addEventListener("tick", animate);
+
+			var controlPoint = new createjs.Graphics();
+			    controlPoint.setStrokeStyle(1);
+			    controlPoint.beginStroke('black');
+			    controlPoint.beginFill('#666');
+			    controlPoint.drawCircle(0,0,8);
+
+			var cp1 = new createjs.Shape(controlPoint);
+			        cp1.x = 50;
+			        cp1.y = 260;
+
+			var cp2 = new createjs.Shape(controlPoint);
+			        cp2.x = 240;
+			        cp2.y = 260;
+
+			var freeform = new createjs.Graphics();
+				freeform.moveTo(0,0);
+				freeform.s('#666');
+				freeform.f('wheat');
+				freeform.bt(cp1.x, cp1.y, cp2.x, cp2.y, 400, 0);
+				freeform.lt(0,0);
+
+			var bez = new createjs.Shape(freeform);
+			        bez.x = 50;
+			        bez.y = 50;
+
+			stage.addChild(cp1, cp2, bez);
+
+			function animate(){
+				shape1.rotation -= 1;
+				shape2.rotation += 2;
+
+				if(con.x > 650 || con.x < 100){
+					speed = -speed;
+				}
+				con.x += speed;
+
+				if(collide1.y > 170 || collide1.y < 100){
+					ySpeed = -ySpeed;
+				}
+				collide1.y += ySpeed;
+				collide2.y -= ySpeed;
+				stage.update();
+
+				var intersection = ndgmr.checkPixelCollision(collide1, collide2, 0.74);
+				if(intersection) collide1.rotation += speed;
+
+			}
+
+		});
+
+	</script>
+</body>
+</html>

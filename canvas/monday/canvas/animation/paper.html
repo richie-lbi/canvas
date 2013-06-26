@@ -19,22 +19,22 @@
 		var sWid = 300,
 			sHei = 800;
 
-
 		function onFrame(event) {
 
 			for (var i = 0; i < project.activeLayer.children.length; i++) {
 				
-					var circ = project.activeLayer.children[i];
-					if(circ.position.x > (sWid - circ.size) || circ.position.x < (0 + circ.size)){
-						circ.speedX = -circ.speedX;
-					}
+				var circ = project.activeLayer.children[i];
+				if(circ.position.x > (sWid - circ.size) || circ.position.x < (0 + circ.size)){
+					circ.speedX = -circ.speedX;
+				}
 
-					if(circ.position.y > (sHei - circ.size) || circ.position.y < (0 + circ.size)){
-						circ.speedY = -circ.speedY;
-					}
-					
-					circ.position.x += circ.speedX;
-					circ.position.y += circ.speedY;
+				if(circ.position.y > (sHei - circ.size) || circ.position.y < (0 + circ.size)){
+					circ.speedY = -circ.speedY;
+				}
+				
+				circ.position.x += circ.speedX;
+				circ.position.y += circ.speedY;
+
 			}
 
 		}
