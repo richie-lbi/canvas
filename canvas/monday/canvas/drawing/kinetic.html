@@ -1,18 +1,28 @@
 <html>
 <head>
+	<style>
+		div#kinetic-canvas{
+			width: 600px;
+			height: 400px;
+		}
+	</style>
+	<link rel="stylesheet" type="text/css" href="../css/style.css"></link>
 </head>
-<body>
+<body id="kineticJS">
 
-<h1>KineticJs</h1>
+<h1>KineticJS > Drawing</h1>
 
-<ol>
-	<li>Create a stage - takes a pseudo canvas elements</li>
-	<li>Draw a shape</li>
-	<li>Add to Layer (- )each layer is its own canvas)</li>
-	<li>Don't forgt to update stage</li>
-</ol>
+<div id="kinetic-canvas"></div>
+<div class="code-snippet">
 
-	<div id="kinetic-canvas"></div>
+	<ol>
+		<li>Create a stage - takes a pseudo canvas elements</li>
+		<li>Draw a shape</li>
+		<li>Add to Layer (- )each layer is its own canvas)</li>
+		<li>Don't forgt to update stage</li>
+	</ol>
+
+</div>
 
 	<script type="text/javascript" src="scripts/jquery-1.10.1.min.js"></script>
 	<script type="text/javascript" src="http://d3lp1msu2r81bx.cloudfront.net/kjs/js/lib/kinetic-v4.5.4.min.js"></script>

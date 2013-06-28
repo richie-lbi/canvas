@@ -1,16 +1,22 @@
 <html>
 <head>
+	<style>
+		canvas{
+			background: black;
+		}
+	</style>
+	<link rel="stylesheet" type="text/css" href="../css/style.css"></link>
 </head>
-<body>
+<body id="paperJS">
 
-<h1>Paper.JS</h1>
-<br/>
+<h1>PaperJS > Interaction</h1>
 
-<ol>
-	<li>http://www.netmagazine.com/tutorials/use-paperjs-create-html5-interactive-vector-animations </li>
-</oL>
-
-	<canvas id="paper-canvas" width="800" height="300" />
+<canvas id="paper-canvas" width="600" height="400"></canvas>
+<div class="code-snippet">
+	<ol>
+		<li>Anim has no frame rate - fast as possible</li>
+	</ol>
+</div>
 
 	<script type="text/javascript" src="../scripts/jquery-1.10.1.min.js"></script>
 	<script type="text/javascript" src="../scripts/paper-min.js"></script>
@@ -26,6 +32,15 @@
 		// Add a segment to the path at the position of the mouse:
 		myPath.add(event.point);
 		myPath.smooth();
+	}
+
+	function onMouseDrag(event) {
+		console.log(event);
+	    var circle = new Path.Circle({
+	        center: event.middlePoint,
+	        radius: event.delta.length / 2
+	    });
+	    circle.fillColor = 'white';
 	}
 			
 	</script>

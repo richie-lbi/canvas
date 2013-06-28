@@ -1,26 +1,35 @@
 <html>
 <head>
+	<style>
+		canvas{
+			background: black;
+		}
+	</style>
+	<link rel="stylesheet" type="text/css" href="../css/style.css"></link>
 </head>
-<body>
+<body id="paperJS">
 
-<h1>PaperJS</h1>
+<h1>PaperJS > Drawing</h1>
 
-<ol>
-	<li>Create a stage - takes a pseudo canvas elements</li>
-	<li>Draw a shape</li>
-	<li>Add to Layer ( each layer is its own canvas)</li>
-	<li>Don't forgt to update stage</li>
-	<li>Smoothing tool</li>
-</ol>
+<canvas id="paper-canvas" width="600" height="400"></canvas>
+<div class="code-snippet">
+	<ol>
+		<li>Create a stage - takes a pseudo canvas elements</li>
+		<li>Draw a shape</li>
+		<li>Add to Layer ( each layer is its own canvas)</li>
+		<li>Don't forgt to update stage</li>
+		<li>Smoothing tool</li>
+	</ol>
 
-<pre>
-	var l = new Path({
-	    segments: [[0,0], [11,0], [11,35],[30,35],[30,44],[0,44]],
-	});
-	l.fillColor = '#f1001c';
-</pre>
+	<pre>
+		var l = new Path({
+		    segments: [[0,0], [11,0], [11,35],[30,35],[30,44],[0,44]],
+		});
+		l.fillColor = '#f1001c';
+	</pre>
+</div>
 
-	<canvas id="paper-canvas" width="800" height="300" />
+
 
 	<script type="text/javascript" src="../scripts/jquery-1.10.1.min.js"></script>
 	<script type="text/javascript" src="../scripts/paper-min.js"></script>

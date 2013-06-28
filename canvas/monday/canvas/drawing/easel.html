@@ -1,28 +1,28 @@
 <html>
 <head>
+	<link rel="stylesheet" type="text/css" href="../css/style.css"></link>
 </head>
-<body>
-<h1>EaselJs</h1>
+<body id="easelJS">
+<h1>EaselJS > Drawing</h1>
 
-<img src="../images/logo_LBi_red.gif" />
+<canvas id="easel-canvas" width="600" height="400"></canvas>
+<div class="code-snippet">
+	<ol>
+		<li>Create a stage - stage becomes canvas element</li>
+		<li>Draw a shape</li>
+		<li>Add to stage</li>
+		<li>Don't forgt to update stage</li>
+	</ol>
+	<pre>
+		var stage = new createjs.Stage("easel-canvas");
 
-<h2> Workflow</h2>
-<ol>
-	<li>Create a stage - stage becomes canvas element</li>
-	<li>Draw a shape</li>
-	<li>Add to stage</li>
-	<li>Don't forgt to update stage</li>
-</ol>
-<pre>
-	var stage = new createjs.Stage("easel-canvas");
+		var shape1 = new createjs.Shape();
+		shape1.graphics.beginFill("red").dr(-20, -20, 40, 40);
 
-	var shape1 = new createjs.Shape();
-	shape1.graphics.beginFill("red").dr(-20, -20, 40, 40);
-
-	stage.addChild(shape1);
-	stage.update();
-</pre>
-<canvas id="easel-canvas" width="800" height="300" />
+		stage.addChild(shape1);
+		stage.update();
+	</pre>
+</div>
 
 	<script type="text/javascript" src="../scripts/jquery-1.10.1.min.js"></script>
 	<script type="text/javascript" src="http://code.createjs.com/createjs-2013.05.14.min.js"></script>
