@@ -1,0 +1,113 @@
+<html>
+<head>
+</head>
+<body>
+
+<h1>PaperJS</h1>
+
+<ol>
+	<li>Create a stage - takes a pseudo canvas elements</li>
+	<li>Draw a shape</li>
+	<li>Add to Layer ( each layer is its own canvas)</li>
+	<li>Don't forgt to update stage</li>
+	<li>Smoothing tool</li>
+</ol>
+
+<pre>
+	var l = new Path({
+	    segments: [[0,0], [11,0], [11,35],[30,35],[30,44],[0,44]],
+	});
+	l.fillColor = '#f1001c';
+</pre>
+
+	<canvas id="paper-canvas" width="800" height="300" />
+
+	<script type="text/javascript" src="../scripts/jquery-1.10.1.min.js"></script>
+	<script type="text/javascript" src="../scripts/paper-min.js"></script>
+	<script type="text/paperscript" canvas="paper-canvas">
+		//$(document).ready(function(){
+
+			var l = new Path({
+			    segments: [[0,0], [11,0], [11,35],[30,35],[30,44],[0,44]],
+			});
+			l.fillColor = '#f1001c';
+
+			var vec = new Point({
+			    angle: 45,
+			    length: 11
+			});
+
+			console.log(vec, ' : ', (vec.rotate(45)))
+
+			var b = new Path({
+			    segments: [[0,0],[22,0],  [[22,22],  vec],[0,44]  ],
+			});
+			b.fillColor = '#f1001c';
+			b.position = new Point(60, 42);
+
+/*
+          context.moveTo(0, 15);
+          context.lineTo(12,15);
+          context.lineTo(12,11);
+          context.lineTo(12,44);
+          context.lineTo(0,44);
+          */
+
+
+			var i1 = new Path({
+			    segments: [[0,0], [12,0], [12,11],[7,11],[7,4],[0,4]],
+			});
+			i1.fillColor = '#f1001c';
+
+			var i2 = new Path({
+			    segments: [[0,15], [12,15], [12,11],[12,44],[0,44]],
+			});
+			i2.fillColor = '#f1001c';
+
+			var i = new Group({
+			    children: [i1, i2]
+			});
+			i.position = new Point(100,22);
+
+/*
+
+          context.lineTo(22,0);
+          context.bezierCurveTo(28,  0,  32,  6,  32,  8);
+          context.lineTo(32,13);
+          context.bezierCurveTo(32,  8,  32,  19,  28,  20);
+          context.bezierCurveTo(33,20,35,23, 35,28);
+          context.bezierCurveTo(35,39,31,43,21,44);
+          context.lineTo(0,44);
+
+
+console.log(view);
+
+
+var y = view.size.height / 2;
+var width = view.size.width;
+var vector = new Point({
+    angle: 70,
+    length: width / 5
+});
+var offset = width / 30;
+var handleTexts = [];
+var abc = new Path();
+abc.segments = [
+    [[5, 0], null, vector.rotate(-90)],
+    [[10, y], vector.rotate(-180), vector]
+    //[[width - offset, y], vector.rotate(90), null]
+];
+abc.fillColor = 'red';
+abc.fullySelected = false;
+
+*/
+
+
+// Path.RegularPolygon(center, numSides, radius)
+var triangle = new Path.RegularPolygon(new Point(400, 100), 3, 50);
+triangle.fillColor = 'cyan';
+
+
+	</script>
+</body>
+</html>
