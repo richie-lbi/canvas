@@ -19,7 +19,21 @@
 	<script>
 		
 		var sWid = 300,
-			sHei = 800;
+			sHei = 800,
+			queryStr = null;
+
+		function getParameterByName() {
+		    var vars = [], hash;
+		    var hashes = window.location.href.slice(window.location.href.indexOf('?') + 1).split('&');
+		    for(var i = 0; i < hashes.length; i++)
+		    {
+		        hash = hashes[i].split('=');
+		        vars.push(hash[0]);
+		        vars[hash[0]] = hash[1];
+		    }
+		    console.log(hashes);
+		    return vars;
+		}
 
 		var circle = {
 
@@ -55,9 +69,13 @@
 			}),
 
 			layer: new Kinetic.Layer(),
-			ballCount: 30,
+
+			queryStr: getParameterByName(),
+			ballCount: 10,
+			
 			init: function(){
-				
+
+				if(this.queryStr.hasOwnProperty('chars')) this.ballCount = this.queryStr.chars;
 
 				for(var i = 0;i< demo.ballCount;i++){
 					demo.create();
