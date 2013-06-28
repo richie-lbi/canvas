@@ -9,7 +9,7 @@
 </head>
 <body id="paperJS">
 
-<h1>PaperJS > Collision</h1>
+<h1>PaperJS > Collision Detection</h1>
 
 <canvas id="paper-canvas" width="600" height="400"></canvas>
 <div class="code-snippet">
@@ -18,52 +18,82 @@
 	</ol>
 </div>
 
-	<script type="text/javascript" src="scripts/jquery-1.10.1.min.js"></script>
-	<script type="text/javascript" src="scripts/paper-min.js"></script>
+	<script type="text/javascript" src="../scripts/jquery-1.10.1.min.js"></script>
+	<script type="text/javascript" src="../scripts/paper-min.js"></script>
 	<script type="text/paperscript" canvas="paper-canvas">
-		//$(document).ready(function(){
 
+		var sWid = 600,
+			sHei = 400;
 
-		    // Create a Paper.js Path to draw a line into it:
-		    var path = new Path();
-		    // Give the stroke a color
-		    path.strokeColor = 'black';
-		    var start = new Point(100, 100);
-		    // Move to start and draw a line from there
-		    path.moveTo(start);
-		    // Note the plus operator on Point objects.
-		    // PaperScript does that for us, and much more!
-		    path.lineTo(start + [ 100, -50 ]);
-		    path.lineTo(start + [ 80, 110 ]);
-		    path.closePath();
-		    path.fillColor = 'cyan';
+		function onFrame(event) {
 
-			var rect = new Path.Rectangle([100, 80], [50, 90]);
-			rect.fillColor = 'lime';
-			rect.strokeColor = 'black';
-			rect.rotate(45);
+			for (var i = 0; i < project.activeLayer.children.length; i++) {
+				
+				var circ = project.activeLayer.children[i];
 
-			var circ = new Path.Circle(rect.position, 29);
-			circ.strokeColor = 'black';
+				var rik = circ.hitTest(100,100);
 
-			var circlePath = new Path.Circle(new Point(50, 50), 15);
-			circlePath.fillColor = 'black';
-			circlePath.opacity = 0.2;
+				if(rik != null) circ.fillColor.hue += 1;
 
-			var p = new Point((Math.random() * 800, 200));
-
-			var speed = 2;
-			function onFrame(event) {
-
-    			rect.rotate(3);
-    			
-    			if(circ.position.x > 750 || circ.position.x < 50){
-    				speed = -speed;
-    			}
-    			circ.position.x += speed;
+				if(circ.position.y > (sHei - circ.size) || circ.position.y < (0 + circ.size)){
+					circ.speedY = -circ.speedY;
+				}
+				
+				circ.position.y += circ.speedY;
 
 			}
 
+		}
+
+
+		var circle = {
+
+			me: null,
+			size: (Math.random(6) * 6) + 4,
+			limit: this.size / 5,
+			sWidth: sWid,
+			sHeight: sHei,
+		
+			init: function(){
+
+				var driver = Math.round(10 * Math.random(10));
+				var speed = (Math.random(5) * driver) + 1;
+				var size = (driver * 1.2) + 1;
+
+				var circ = new Path.Circle([((Math.random(sWid) * (sWid - 30)) + 15),((Math.random(sHei) * (sHei - 30)) + 15)], size);
+				circ.fillColor = 'red';
+				circ.speedX = speed;	
+				circ.speedY = speed;
+				circ.size = size;		
+				return circ;
+			}
+
+		}
+
+		var demo = {
+		
+			canvas: null,
+			ballCount: 30,
+			
+			init: function(){
+
+				for(var i = 0;i< demo.ballCount;i++){
+					demo.create();
+				}
+
+			},
+			
+			create: function(){
+				var shape = new circle.init();
+			}
+			
+		}
+
+		$(document).ready(function(){
+
+			demo.init();
+
+		});
 
 	</script>
 </body>
