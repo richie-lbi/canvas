@@ -1,0 +1,12 @@
+body{
+	font-family: Helvetica;
+}
+
+canvas, #kinetic-canvas{
+	background: black;
+	float: left;
+}
+
+.code-snippet{
+	float: left;
+}
