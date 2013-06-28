@@ -5,19 +5,25 @@
 			background: black;
 		}
 	</style>
+	<link rel="stylesheet" type="text/css" href="../css/style.css"></link>
 </head>
-<body>
+<body id="paperJS">
 
-<h1>Paper.JS</h1>
+<h1>PaperJS > Animation</h1>
 
-	<canvas id="paper-canvas" width="300" height="800" />
+<canvas id="paper-canvas" width="600" height="400"></canvas>
+<div class="code-snippet">
+	<ol>
+		<li>Unadjustable 60 frames per second</li>
+	</ol>
+</div>
 
 	<script type="text/javascript" src="../scripts/jquery-1.10.1.min.js"></script>
 	<script type="text/javascript" src="../scripts/paper-min.js"></script>
 	<script type="text/paperscript" canvas="paper-canvas">
 
-		var sWid = 300,
-			sHei = 800,
+		var sWid = 600,
+			sHei = 400,
 			queryStr = null;
 
 		function getParameterByName() {

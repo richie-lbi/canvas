@@ -1,22 +1,22 @@
 <html>
 <head>
-	<style>
-		canvas{
-			background: black;
-		}
-	</style>
+	<link rel="stylesheet" type="text/css" href="../css/style.css"></link>
 </head>
-<body>
-<h1>EaselJS</h1>
-
-<canvas id="easel-canvas" width="300" height="800" />
+<body id="easelJS">
+<h1>EaselJS > Animation</h1>
+<canvas id="easel-canvas" width="600" height="400"></canvas>
+<div class="code-snippet">
+	<ol>
+		<li>Adjustable framerate, adjustable intervals</li>
+	</ol>
+</div>
 
 	<script type="text/javascript" src="../scripts/jquery-1.10.1.min.js"></script>
 	<script type="text/javascript" src="http://code.createjs.com/createjs-2013.05.14.min.js"></script>
 	<script>
 	
-		var sWid = 300,
-			sHei = 800,
+		var sWid = 600,
+			sHei = 400,
 			queryStr = null;
 
 		function getParameterByName() {

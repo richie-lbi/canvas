@@ -9,4 +9,5 @@ canvas, #kinetic-canvas{
 
 .code-snippet{
 	float: left;
+	width: 400px;
 }
