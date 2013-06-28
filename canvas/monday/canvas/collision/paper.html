@@ -14,12 +14,15 @@
 <canvas id="paper-canvas" width="600" height="400"></canvas>
 <div class="code-snippet">
 	<ol>
-		<li>http://www.netmagazine.com/tutorials/use-paperjs-create-html5-interactive-vector-animations </li>
+		<li>http://www.netmagazine.com/tutorials/use-paperjs-create-html5-interactive-vector-animations</li>
+		<li>project.activeLayer.children</li>
 	</ol>
-	<pre>
+	<b>Create polygon shape</b>
+<pre>
 var prettyPoly = new Path.RegularPolygon([100,100], 3, 30);
 prettyPoly.fillColor = 'cyan';
 </pre>
+
 </div>
 
 	<script type="text/javascript" src="../scripts/jquery-1.10.1.min.js"></script>
@@ -28,16 +31,33 @@ prettyPoly.fillColor = 'cyan';
 
 		var sWid = 600,
 			sHei = 400;
+			missleArr = [],
+			hitOptions = {
+					    segments: true,
+					    stroke: false,
+					    fill: true,
+					    tolerance: 30
+					};
+
+			var hitMe = new Path.RegularPolygon([100,100], 3, 30);
+			hitMe.fillColor = 'white';
+
+			var copy = hitMe.clone();
+			copy.position = new Point(300,300);
 
 		function onFrame(event) {
 
-			for (var i = 0; i < project.activeLayer.children.length; i++) {
+			for (var i = 2; i < project.activeLayer.children.length; i++) {
 				
 				var circ = project.activeLayer.children[i];
 				circ.rotate(1);
-				var collide = circ.hitTest(100,100);
 
-				if(collide != null) circ.fillColor.hue += 1;
+				var collide = circ.hitTest(project.activeLayer.children[0].position, hitOptions);
+				
+				if(collide != null){
+					circ.fillColor.hue += 1;
+					project.activeLayer.children[0].rotate(1);
+				}
 
 				if(circ.position.y > (sHei - circ.size) || circ.position.y < (0 + circ.size)){
 					circ.speedY = -circ.speedY;
@@ -63,12 +83,9 @@ prettyPoly.fillColor = 'cyan';
 				var driver = Math.round(10 * Math.random(10));
 				var speed = (Math.random(5) * driver) + 1;
 				var size = (driver * 1.2) + 3;
-
-// 				var circ = new Path.Circle([((Math.random(sWid) * (sWid - 30)) + 15),((Math.random(sHei) * (sHei - 30)) + 15)], size);
-				// circ.fillColor = 'red';
 				
 				var circ = new Path.RegularPolygon([((Math.random(sWid) * (sWid - 30)) + 15),((Math.random(sHei) * (sHei - 30)) + 15)], 7, size);
-				circ.fillColor = 'cyan';
+				circ.fillColor = 'red';
 
 				circ.speedX = speed;	
 				circ.speedY = speed;
@@ -86,7 +103,7 @@ prettyPoly.fillColor = 'cyan';
 			init: function(){
 
 				for(var i = 0;i< demo.ballCount;i++){
-					demo.create();
+					missleArr.push(demo.create());
 				}
 
 			},
