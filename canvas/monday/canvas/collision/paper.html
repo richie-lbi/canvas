@@ -16,6 +16,10 @@
 	<ol>
 		<li>http://www.netmagazine.com/tutorials/use-paperjs-create-html5-interactive-vector-animations </li>
 	</ol>
+	<pre>
+var prettyPoly = new Path.RegularPolygon([100,100], 3, 30);
+prettyPoly.fillColor = 'cyan';
+</pre>
 </div>
 
 	<script type="text/javascript" src="../scripts/jquery-1.10.1.min.js"></script>
@@ -30,10 +34,10 @@
 			for (var i = 0; i < project.activeLayer.children.length; i++) {
 				
 				var circ = project.activeLayer.children[i];
+				circ.rotate(1);
+				var collide = circ.hitTest(100,100);
 
-				var rik = circ.hitTest(100,100);
-
-				if(rik != null) circ.fillColor.hue += 1;
+				if(collide != null) circ.fillColor.hue += 1;
 
 				if(circ.position.y > (sHei - circ.size) || circ.position.y < (0 + circ.size)){
 					circ.speedY = -circ.speedY;
@@ -49,7 +53,7 @@
 		var circle = {
 
 			me: null,
-			size: (Math.random(6) * 6) + 4,
+			size: (Math.random(20) * 6) + 4,
 			limit: this.size / 5,
 			sWidth: sWid,
 			sHeight: sHei,
@@ -58,10 +62,14 @@
 
 				var driver = Math.round(10 * Math.random(10));
 				var speed = (Math.random(5) * driver) + 1;
-				var size = (driver * 1.2) + 1;
+				var size = (driver * 1.2) + 3;
 
-				var circ = new Path.Circle([((Math.random(sWid) * (sWid - 30)) + 15),((Math.random(sHei) * (sHei - 30)) + 15)], size);
-				circ.fillColor = 'red';
+// 				var circ = new Path.Circle([((Math.random(sWid) * (sWid - 30)) + 15),((Math.random(sHei) * (sHei - 30)) + 15)], size);
+				// circ.fillColor = 'red';
+				
+				var circ = new Path.RegularPolygon([((Math.random(sWid) * (sWid - 30)) + 15),((Math.random(sHei) * (sHei - 30)) + 15)], 7, size);
+				circ.fillColor = 'cyan';
+
 				circ.speedX = speed;	
 				circ.speedY = speed;
 				circ.size = size;		
