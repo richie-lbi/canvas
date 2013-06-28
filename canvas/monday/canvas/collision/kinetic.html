@@ -1,10 +1,19 @@
 <html>
 <head>
+	<style>
+		div#kinetic-canvas{
+			width: 600px;
+			height: 400px;
+		}
+	</style>
+	<link rel="stylesheet" type="text/css" href="../css/style.css"></link>
 </head>
-<body>
+<body id="kineticJS">
 
-	<h1>Collision Test - KineticJs</h1>
-	<div id="kinetic-canvas" width="800" height="300"></div>
+<h1>KineticJS > Collision Detection</h1>
+<div id="kinetic-canvas"></div>
+
+<div class="code-snippet">
 
 	<ol>
 		<li>Using console during heavy animation session, severely hampers performance of the browser<li>
@@ -77,7 +86,9 @@
                 y: 250,
                 height: 50,
                 width: 300,
-                fill: "black"
+                fill: "black",
+                stroke: "white",
+                strokeWidth: 2
       		});
 			
 			noBitmapLayer.add(rocksNoBitmap);

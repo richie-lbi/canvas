@@ -1,17 +1,19 @@
 <html>
 <head>
+	<link rel="stylesheet" type="text/css" href="../css/style.css"></link>
 </head>
-<body>
-<h1>Collision Test EaselJs - bitmap only using plugin</h1>
+<body id="easelJS">
+<h1>EaselJS > Collision Detection</h1>
 
-<h2>Method</h2>
-<ol>
-	<li>Load rockface bitmap, then load 1 bitmap for the falling object</li>
-	<li>Clone the falling object</li>
-	<li>Animation Ticker</li>
-</ol>
-
-<canvas id="easel-canvas" width="800" height="300" />
+<canvas id="easel-canvas" width="600" height="400"></canvas>
+<div class="code-snippet">
+	<ol>
+		<li>ndgmr.Collision.js</li>
+		<li>Load rockface bitmap, then load 1 bitmap for the falling object</li>
+		<li>Clone the falling object</li>
+		<li>Animation Ticker</li>
+	</ol>
+</div>
 
 	<script type="text/javascript" src="../scripts/jquery-1.10.1.min.js"></script>
 	<script type="text/javascript" src="http://code.createjs.com/createjs-2013.05.14.min.js"></script>
@@ -36,6 +38,8 @@
 			}
 
 			createjs.Ticker.addEventListener("tick", animate);
+			createjs.Ticker.setFPS(60);
+
 			rain = 50;
 
 			for(var i = 0;i < rain; i++){
