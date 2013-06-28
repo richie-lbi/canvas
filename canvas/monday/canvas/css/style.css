@@ -13,6 +13,6 @@ canvas, #kinetic-canvas{
 	margin-left: 20px;
 }
 
-.code-snippet li{
+.code-snippet ol{
 	list-style: none;
 }

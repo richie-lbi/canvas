@@ -22,6 +22,31 @@
 		<li>Don't forgt to update stage</li>
 	</ol>
 
+<b>Drawing the 'L'</b>
+<pre>
+var lbi = new Kinetic.Layer();
+var l = new Kinetic.Shape({
+drawFunc: function(canvas) {
+  var context = canvas.getContext();
+  context.beginPath();
+  context.moveTo(0, 0);
+  context.lineTo(11,0);
+  context.lineTo(11,35);
+  context.lineTo(30,35);
+  context.lineTo(30,44);
+  context.lineTo(0,44);
+  context.closePath();
+  canvas.fillStroke(this);
+},
+fill: '#f1001c'
+});
+
+lbi.add(l);
+
+stage.add(lbi);
+
+</pre>
+
 </div>
 
 	<script type="text/javascript" src="scripts/jquery-1.10.1.min.js"></script>

@@ -22,6 +22,10 @@
 var prettyPoly = new Path.RegularPolygon([100,100], 3, 30);
 prettyPoly.fillColor = 'cyan';
 </pre>
+	<b>Detect collision</b>
+<pre>
+var intersection = target.getIntersections(otherTarget);
+</pre>
 
 </div>
 
@@ -33,11 +37,11 @@ prettyPoly.fillColor = 'cyan';
 			sHei = 400;
 			missleArr = [];
 
-			var hitMe = new Path.RegularPolygon([100,100], 3, 30);
-			hitMe.fillColor = 'white';
+			var hit1 = new Path.RegularPolygon([100,100], 3, 30);
+			hit1.fillColor = 'white';
 
-			var copy = hitMe.clone();
-			copy.position = new Point(300,300);
+			var hit2 = hit1.clone();
+			hit2.position = new Point(300,300);
 
 		function onFrame(event) {
 
@@ -46,10 +50,14 @@ prettyPoly.fillColor = 'cyan';
 				var circ = project.activeLayer.children[i];
 				circ.rotate(1);
 				
-				var intersection = circ.getIntersections(project.activeLayer.children[0]);
+				var intersection1 = circ.getIntersections(hit1);
+				var intersection2 = circ.getIntersections(hit2);
 
-				if(intersection.length > 0) {
+				if(intersection1.length > 0){
 					project.activeLayer.children[0].rotate(1);
+					circ.fillColor.hue += 1;
+				} else if(intersection2.length > 0) {
+					project.activeLayer.children[1].rotate(1);
 					circ.fillColor.hue += 1;
 				}
 
