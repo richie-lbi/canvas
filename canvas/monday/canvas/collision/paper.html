@@ -15,7 +15,7 @@
 <div class="code-snippet">
 	<ol>
 		<li>http://www.netmagazine.com/tutorials/use-paperjs-create-html5-interactive-vector-animations</li>
-		<li>project.activeLayer.children</li>
+		<li>Collision functionality still in its infanceproject.activeLayer.children</li>
 	</ol>
 	<b>Create polygon shape</b>
 <pre>
@@ -31,13 +31,7 @@ prettyPoly.fillColor = 'cyan';
 
 		var sWid = 600,
 			sHei = 400;
-			missleArr = [],
-			hitOptions = {
-					    segments: true,
-					    stroke: false,
-					    fill: true,
-					    tolerance: 30
-					};
+			missleArr = [];
 
 			var hitMe = new Path.RegularPolygon([100,100], 3, 30);
 			hitMe.fillColor = 'white';
@@ -51,12 +45,12 @@ prettyPoly.fillColor = 'cyan';
 				
 				var circ = project.activeLayer.children[i];
 				circ.rotate(1);
-
-				var collide = circ.hitTest(project.activeLayer.children[0].position, hitOptions);
 				
-				if(collide != null){
-					circ.fillColor.hue += 1;
+				var intersection = circ.getIntersections(project.activeLayer.children[0]);
+
+				if(intersection.length > 0) {
 					project.activeLayer.children[0].rotate(1);
+					circ.fillColor.hue += 1;
 				}
 
 				if(circ.position.y > (sHei - circ.size) || circ.position.y < (0 + circ.size)){
