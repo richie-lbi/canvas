@@ -29,7 +29,6 @@
 		        vars.push(hash[0]);
 		        vars[hash[0]] = hash[1];
 		    }
-		    console.log(hashes);
 		    return vars;
 		}
 
@@ -63,11 +62,18 @@
 			sHeight: sHei,
 		
 			init: function(){
-				var circ = new Path.Circle([((Math.random(sWid) * (sWid - 30)) + 15),((Math.random(sHei) * (sHei - 30)) + 15)], circle.size);
+
+				var direction = (Math.round(Math.random(1)) === 0)? false : true ;
+				var driver = Math.round(10 * Math.random(10));
+				var speed = (Math.random(5) * driver) + 1;
+				var size = (driver * 1.2) + 1;
+				if(direction) speed = -speed;
+
+				var circ = new Path.Circle([((Math.random(sWid) * (sWid - 30)) + 15),((Math.random(sHei) * (sHei - 30)) + 15)], size);
 				circ.fillColor = 'white';
-				circ.speedX = Math.random(3) * 10;	
-				circ.speedY = Math.random(3) * 10;
-				circ.size = circle.size;		
+				circ.speedX = speed;	
+				circ.speedY = speed;
+				circ.size = size;		
 				return circ;
 			}
 
@@ -81,12 +87,12 @@
 			
 			init: function(){
 
-				if(this.queryStr.hasOwnProperty('chars')) this.ballCount = this.queryStr.chars;
+				if(this.queryStr.hasOwnProperty('ball')) this.ballCount = this.queryStr.ball;
 
 				for(var i = 0;i< demo.ballCount;i++){
 					demo.create();
 				}
-				demo.animate();
+
 			},
 			
 			create: function(){

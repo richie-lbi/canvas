@@ -35,19 +35,24 @@
 		var circle = {
 
 			me: null,
-			size: (Math.random(6) * 6) + 4,
-			limit: this.size / 5,
 			sWidth: 800,
 			sHeight: 300,
 		
 			init: function(){
+
+				var direction = (Math.round(Math.random(1)) === 0)? false : true ;
+				var driver = Math.round(10 * Math.random(10));
+				var speed = (Math.random(5) * driver) + 1;
+				var size = (driver * 1.2) + 1;
+				if(direction) speed = -speed;
+
 				me = new createjs.Shape(),				
-				me.graphics.beginFill("white").drawCircle(0, 0, circle.size);				
+				me.graphics.beginFill("white").drawCircle(0, 0, size);				
 				me.x = (Math.random(sWid) * (sWid - 30)) + 15;
 				me.y = (Math.random(sHei) * (sHei - 30)) + 15;
-				me.speedX = Math.random(3) * 10;	
-				me.speedY = Math.random(3) * 10;	
-				me.size = circle.size;			
+				me.speedX = speed;	
+				me.speedY = speed;	
+				me.size = size;			
 				return me;
 			}
 
@@ -58,10 +63,15 @@
 			canvas: new createjs.Stage("easel-canvas"),
 			queryStr: getParameterByName(),
 			ballCount: 10,
+			fps: 40,
+			sInt: 25,
 			
 			init: function(){
 
-				if(this.queryStr.hasOwnProperty('chars')) this.ballCount = this.queryStr.chars;
+				if(this.queryStr.hasOwnProperty('ball')) this.ballCount = this.queryStr.ball;
+				if(this.queryStr.hasOwnProperty('fps')) this.fps = this.queryStr.fps;
+				if(this.queryStr.hasOwnProperty('sInt')) this.sInt = this.queryStr.sInt;
+
 				demo.events();
 				for(var i = 0;i< demo.ballCount;i++){
 					demo.create();
@@ -76,8 +86,8 @@
 			
 			animate: function(){
 				createjs.Ticker.addEventListener("tick", demo.tick);
-				createjs.Ticker.setInterval(25);
-				createjs.Ticker.setFPS(40);
+				createjs.Ticker.setInterval(demo.sInt);
+				createjs.Ticker.setFPS(demo.fps);
 			},
 		
 			tick: function() { 

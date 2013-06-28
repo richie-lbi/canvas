@@ -13,6 +13,11 @@
 <h1>KineticJS</h1>
 
 <div id="kinetic-canvas"></div>
+	<div>
+		<ol>
+			<li>Anim has no frame rate - fast as possible</li>
+		</ol>
+	</div>
 
 	<script type="text/javascript" src="../scripts/jquery-1.10.1.min.js"></script>
 	<script type="text/javascript" src="http://d3lp1msu2r81bx.cloudfront.net/kjs/js/lib/kinetic-v4.5.4.min.js"></script>
@@ -38,19 +43,23 @@
 		var circle = {
 
 			me: null,
-			size: (Math.random(6) * 6) + 4,
-			limit: this.size / 5,
 			sWidth: 800,
 			sHeight: 300,
-		
+			
 			init: function(){
+				
+				var direction = (Math.round(Math.random(1)) === 0)? false : true ;
+				var driver = Math.round(10 * Math.random(10));
+				var speed = (Math.random(5) * driver) + 1;
+				var size = (driver * 1.2) + 1;
+				if(direction) speed = -speed;
 
 				var ball = new Kinetic.Circle({
-					radius: 20,
+					radius: size,
 					x: (Math.random(sWid) * (sWid - 30)) + 15,
 					y: (Math.random(sHei) * (sHei - 30)) + 15,
-					speedX: Math.random(3) * 10,	
-					speedY: Math.random(3) * 10,	
+					speedX: speed,	
+					speedY: speed,	
 					fill: 'white'
 				});
 
@@ -75,7 +84,7 @@
 			
 			init: function(){
 
-				if(this.queryStr.hasOwnProperty('chars')) this.ballCount = this.queryStr.chars;
+				if(this.queryStr.hasOwnProperty('ball')) this.ballCount = this.queryStr.ball;
 
 				for(var i = 0;i< demo.ballCount;i++){
 					demo.create();
