@@ -11,24 +11,24 @@
 
 <h1>PaperJS > Interaction</h1>
 
-<canvas id="paper-canvas" width="600" height="400"></canvas>
+<div class="many-canvases">
+	<canvas id="paper-canvas" width="600" height="170"></canvas>
+	<canvas id="paper-canvas2" width="600" height="170"></canvas>
+</div>
 <div class="code-snippet">
 	<ol>
 		<li>Anim has no frame rate - fast as possible</li>
 	</ol>
 
-	<pre>
-	function onMouseDrag(event) {
-
-	    var circle = new Path.Circle({
-	        center: event.middlePoint,
-	        radius: event.delta.length / 2
-	    });
-	    
-	    circle.fillColor = 'white';
-
-	}
-	</pre>
+<pre>
+function onMouseDrag(event) {
+	var circle = new Path.Circle({
+	    center: event.middlePoint,
+	    radius: event.delta.length / 2
+	});
+	circle.fillColor = 'white';
+}
+</pre>
 </div>
 
 	<script type="text/javascript" src="../scripts/jquery-1.10.1.min.js"></script>
@@ -48,7 +48,6 @@
 	}
 
 	function onMouseDrag(event) {
-		console.log(event);
 	    var circle = new Path.Circle({
 	        center: event.middlePoint,
 	        radius: event.delta.length / 2
@@ -56,6 +55,23 @@
 	    circle.fillColor = 'white';
 	}
 			
+	</script>
+
+	<script type="text/paperscript" canvas="paper-canvas2">
+	
+		var m = new Path.RegularPolygon([100,100], 9, 40);
+		m.fillColor = 'white';
+
+		for(var i = 0;i < 4;i++){
+			var temp = new Path.RegularPolygon([(Math.random(10) * 60) + 30, (Math.random(10) * 40) + 30], 9, 10);
+			temp.fillColor = 'red';
+		}
+
+		m.onClick = function(event) {
+		    this.fillColor = 'yellow';
+		    console.log(event)
+		}
+
 	</script>
 </body>
 </html>

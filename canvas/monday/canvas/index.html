@@ -1,13 +1,30 @@
 <html>
 <head>
+	<link rel="stylesheet" type="text/css" href="css/style.css"></link>
 </head>
 <body>
 
-<button id="more-dots">More Dots</button>
-<br/>
+<h1>SVG and Canvas</h1>
 
-	<canvas id="richie" width="800" height="300" />
+	<canvas id="richie" width="600" height="400">My 'no canvas' fall back</canvas>
 
+<div class="code-snippet">
+	<ol>
+		<li>http://www.carto.net/svg/samples/animated_bustrack.shtml</li>
+	</ol>
+<pre>
+function onMouseDrag(event) {
+
+	var circle = new Path.Circle({
+	    center: event.middlePoint,
+	    radius: event.delta.length / 2
+	});
+
+	circle.fillColor = 'white';
+
+}
+</pre>
+</div>
 	<script type="text/javascript" src="scripts/jquery-1.10.1.min.js"></script>
 	<script type="text/javascript" src="scripts/kinetic-v4.5.3.min.js"></script>
 	<script type="text/javascript" src="http://code.createjs.com/createjs-2013.05.14.min.js"></script>
@@ -82,7 +99,7 @@
 		
 		$(document).ready(function(){
 
-			demo.init();
+			// demo.init();
 
 		});
 

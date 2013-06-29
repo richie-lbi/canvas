@@ -5,6 +5,7 @@ body{
 canvas, #kinetic-canvas{
 	background: black;
 	float: left;
+	color: white;
 }
 
 .code-snippet{
@@ -15,4 +16,13 @@ canvas, #kinetic-canvas{
 
 .code-snippet ol{
 	padding: 0 0 0 20px;
+}
+
+.many-canvases{
+	float: left;
+}
+
+.many-canvases canvas{
+	clear: both;
+	margin: 20px 0;
 }
