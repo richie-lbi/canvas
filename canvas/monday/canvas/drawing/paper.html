@@ -14,11 +14,10 @@
 <canvas id="paper-canvas" width="600" height="400"></canvas>
 <div class="code-snippet">
 	<ol>
-		<li>Create a stage - takes a pseudo canvas elements</li>
-		<li>Draw a shape</li>
-		<li>Add to Layer ( each layer is its own canvas)</li>
-		<li>Don't forgt to update stage</li>
-		<li>Smoothing tool</li>
+		<li>Create an element</li>
+		<li>It's automatically added to the projectlist</li>
+		<li>Accessed as part of project.activeLayer.children</li>
+		<li>Based on Illustrator layer metaphor</li>
 	</ol>
 <b>Drawing the 'L'</b>
 <pre>
@@ -36,8 +35,6 @@ var vector = new Point({
 });
 </pre>
 </div>
-
-
 
 	<script type="text/javascript" src="../scripts/jquery-1.10.1.min.js"></script>
 	<script type="text/javascript" src="../scripts/paper-min.js"></script>

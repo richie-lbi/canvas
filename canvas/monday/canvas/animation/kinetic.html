@@ -15,8 +15,15 @@
 <div id="kinetic-canvas"></div>
 <div class="code-snippet">
 	<ol>
-		<li>Anim has no frame rate - fast as possible</li>
+		<li>Anim has no frame rate - it just runs fast as possible (60fps)</li>
 	</ol>
+<b>Animation event</b>
+<pre>
+var anim = new Kinetic.Animation(function(frame) {
+	demo.animateMe();
+}, [demo.layer]);
+anim.start();
+</pre>
 </div>
 
 	<script type="text/javascript" src="../scripts/jquery-1.10.1.min.js"></script>

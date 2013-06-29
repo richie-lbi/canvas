@@ -5,14 +5,21 @@
 <body id="easelJS">
 <h1>EaselJS > Interaction</h1>
 
-<canvas id="easel-canvas" width="800" height="300"></canvas>
+<canvas id="easel-canvas" width="600" height="400"></canvas>
 
 <div class="code-snippet">
 	<ol>
-		<li>Load rockface bitmap, then load 1 bitmap for the falling object</li>
-		<li>Clone the falling object</li>
-		<li>Animation Ticker</li>
+		<li>DOMElement Class - the documentation say it's experimental and therefore buggy</li>
 	</ol>
+<pre>
+shape1.onPress = function(evt) { 
+   // add handlers directly to the event object:
+    evt.onMouseMove = function(evt) {
+		evt.target.x = evt.stageX;
+        stage.update();
+    }
+}
+</pre>
 </div>
 
 	<script type="text/javascript" src="../scripts/jquery-1.10.1.min.js"></script>
@@ -22,21 +29,30 @@
 		$(document).ready(function(){
 			
 			var stage = new createjs.Stage("easel-canvas");
-			
+			stage.enableMouseOver = true;
+
 			var shape1 = new createjs.Shape();
 			shape1.graphics.beginFill("#ff00ff").dr(-20, -20, 40, 40);
-			stage.addChild(shape1);
+			shape1.x = 100;
+			shape1.y = 100;
+
+			var spinner = new createjs.Shape();
+			spinner.graphics.beginFill("cyan").dr(-20, -20, 40, 40);
+			spinner.x = 400;
+			spinner.y = 100;
+			stage.addChild(shape1, spinner);
 			stage.update();
-			
+
 			shape1.onPress = function(evt) { 
 			   // add handlers directly to the event object:
 			    evt.onMouseMove = function(evt) {
 					evt.target.x = evt.stageX;
+					spinner.rotation = evt.target.x;
 			        stage.update();
 			    }
-			    evt.onMouseUp = function(evt) { console.log("up"); }
-
+			    
 			 }
+			 shape1.mouseover = function(evt) { console.log("up"); }
 
 		});
 

@@ -19,7 +19,7 @@
 	<ol>
 		<li>Anim has no frame rate - fast as possible</li>
 	</ol>
-
+<b>MouseDrag event</b>
 <pre>
 function onMouseDrag(event) {
 	var circle = new Path.Circle({
@@ -66,6 +66,8 @@ function onMouseDrag(event) {
 			var temp = new Path.RegularPolygon([(Math.random(10) * 60) + 30, (Math.random(10) * 40) + 30], 9, 10);
 			temp.fillColor = 'red';
 		}
+
+
 
 		m.onClick = function(event) {
 		    this.fillColor = 'yellow';
