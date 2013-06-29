@@ -42,7 +42,6 @@ var vector = new Point({
 	<script type="text/javascript" src="../scripts/jquery-1.10.1.min.js"></script>
 	<script type="text/javascript" src="../scripts/paper-min.js"></script>
 	<script type="text/paperscript" canvas="paper-canvas">
-		//$(document).ready(function(){
 
 			var l = new Path({
 			    segments: [[0,0], [11,0], [11,35],[30,35],[30,44],[0,44]]
@@ -54,11 +53,45 @@ var vector = new Point({
 			    length: 11
 			});
 
-			var b = new Path({
-			    segments: [[0,0],[22,0],  [[22,22],  vec],[0,44]  ],
+			var from = new Point(22, 0);
+			var through = new Point(27, 3);
+			var to = new Point(32, 8);
+			var b1 = new Path.Arc(from, through, to);
+			b1.add(32,13);
+			b1.curveTo([31,15],[28,20]);
+			b1.curveTo([33,22],[35,30]);
+			b1.curveTo([31,40],[21,44]);
+			b1.add(0,44);
+			b1.add(0,0);
+			b1.fillColor = '#f1001c';
+			b1.closePath();
+			b1.position = new Point(350,100);
+			b1.position = new Point(60, 42);
+
+			var b2 = new Path({
+			    segments: [[11,8], [17,8], [17,18],[11,18]],
 			});
-			b.fillColor = '#f1001c';
-			b.position = new Point(60, 42);
+			b2.fillColor = 'white';
+			b2.position = new Point(60,35);
+
+			var b3 = new Path({
+			    segments: [[11,25], [20,25], [19,35],[11,35]],
+			});
+			b3.fillColor = 'white';
+			b3.position = new Point(60,49);
+
+			var b = new Group({
+			    children: [b1, b2, b3]
+			});
+			// b.position = new Point(44,16);
+
+/*
+			var b2 = new createjs.Shape();
+			b2.graphics.f("white").mt(11, 8).lt(17,8).bt( 21,  8,  21,  18,  17,  18).lt(11,18); 
+
+			var b3 = new createjs.Shape();
+			b3.graphics.f("white").mt(11, 25).lt(20,25).bt( 25,  25,  24,  35,  19,  35).lt(11,35); 
+*/
 
 			var i1 = new Path({
 			    segments: [[0,0], [12,0], [12,11],[7,11],[7,4],[0,4]],
@@ -75,38 +108,10 @@ var vector = new Point({
 			});
 			i.position = new Point(100,22);
 
-/*
-
-          context.lineTo(22,0);
-          context.bezierCurveTo(28,  0,  32,  6,  32,  8);
-          context.lineTo(32,13);
-          context.bezierCurveTo(32,  8,  32,  19,  28,  20);
-          context.bezierCurveTo(33,20,35,23, 35,28);
-          context.bezierCurveTo(35,39,31,43,21,44);
-          context.lineTo(0,44);
+// mt(0, 0).lt(22,0).bt( 28,  0,  32,  6,  32,  8 ).lt(32,13).bt( 32,  8,  32,  19,  28,  20 ).bt( 33,20,35,23, 35,28).bt(35,39,31,43,21,44).lt(0,44);
 
 
-console.log(view);
-
-
-var y = view.size.height / 2;
-var width = view.size.width;
-var vector = new Point({
-    angle: 70,
-    length: width / 5
-});
-var offset = width / 30;
-var handleTexts = [];
-var abc = new Path();
-abc.segments = [
-    [[5, 0], null, vector.rotate(-90)],
-    [[10, y], vector.rotate(-180), vector]
-    //[[width - offset, y], vector.rotate(90), null]
-];
-abc.fillColor = 'red';
-abc.fullySelected = false;
-
-*/
+/**/
 
 
 	</script>

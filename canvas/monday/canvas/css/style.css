@@ -10,9 +10,9 @@ canvas, #kinetic-canvas{
 .code-snippet{
 	float: left;
 	width: 400px;
-	margin-left: 20px;
+	margin-left: 30px;
 }
 
 .code-snippet ol{
-	list-style: none;
+	padding: 0 0 0 20px;
 }
