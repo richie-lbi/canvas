@@ -11,13 +11,20 @@
 <canvas id="easel-canvas" width="600" height="400"></canvas>
 <div class="code-snippet">
 	<ol>
-		<li>http://www.createjs.com/#!/EaselJS - it's Flash for HTML5!</li>
-		<li>Uses Canvas so IE9 and above</li>
-		<li>EaselJS is Javascript so supports for Objects and Arrays etc </li>
+		<li><a href="http://www.createjs.com/#!/EaselJS">EaselJS</a> - it's Flash for HTML5!</li>
+		<li>Size: 62k</li>
+		<li>Support: IE9 +</li>
+		<li>EaselJS is Javascript so supports usual stuff like Objects and Arrays etc as well as familiar syntax</li>
 		<li>Uses <b>createjs</b> namespace</li>
+		<li>Classes of note: DisplayObject, Stage, Container, Bitmap (Draws an image, video or canvas to the canvas according to its display properties), BitmapAnimation, Shape, Graphics, Text, DOMElement, Filter</li>
 		<li>DisplayObject : Abstract base class for all display elements in EaselJS. Exposes all of the display properties (ex. x, y, rotation, scaleX, scaleY, alpha, shadow, etc) that are common to all display objects.</li>
 		<li>Support of touch devices is built in</li>
 	</ol>
+	<table>
+		<tr>
+			<td>Comes as part of createJS suite</td>
+		</tr>
+	</table>
 </div>
 
 	<script type="text/javascript" src="../scripts/jquery-1.10.1.min.js"></script>
@@ -31,15 +38,35 @@
 			t.x = 5;
 			t.y = 20;
 			t.textBaseline = "alphabetic";
+
+
+var box = new createjs.Shape();
+box.graphics.beginLinearGradientFill(["#ff0000", "#0000ff"], [0, 1], 0, 0, 0, 100)
+box.graphics.drawRect(0, 0, 100, 100);
+box.cache(0, 0, 100, 100);
+
+
+
 			img = new Image();
 			img.onload = handleImageLoad;
 			img.src = "../images/carrot.png";
+
+
 
 			function handleImageLoad() {
 
 			    bmp = new createjs.Bitmap(img);
 			    bmp.x = 10;
 			    bmp.y = 50;
+
+
+bmp.filters = [
+     new createjs.ColorFilter(0, 0, 0, 1, 255, 0, 0),
+     new createjs.BoxBlurFilter(5, 5, 10)
+ ];
+ bmp.cache(0,0, 100, 100);
+
+
 			    stage.addChild(bmp);
 			    stage.update();
 			}
