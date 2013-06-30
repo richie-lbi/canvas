@@ -1,6 +1,9 @@
 <html>
 <head>
 	<link rel="stylesheet" type="text/css" href="../css/style.css"></link>
+	<style>
+
+	</style>
 </head>
 <body id="easelJS">
 <h1>EaselJS > Intro</h1>
@@ -8,69 +11,41 @@
 <canvas id="easel-canvas" width="600" height="400"></canvas>
 <div class="code-snippet">
 	<ol>
+		<li>http://www.createjs.com/#!/EaselJS - it's Flash for HTML5!</li>
 		<li>Uses Canvas so IE9 and above</li>
 		<li>EaselJS is Javascript so supports for Objects and Arrays etc </li>
-		<li>Flash - Similar metaphors</li>
-		<li>Uses createjs namespace</li>
+		<li>Uses <b>createjs</b> namespace</li>
 		<li>DisplayObject : Abstract base class for all display elements in EaselJS. Exposes all of the display properties (ex. x, y, rotation, scaleX, scaleY, alpha, shadow, etc) that are common to all display objects.</li>
 		<li>Support of touch devices is built in</li>
 	</ol>
-<b>Bold</b>
-<pre>
-
-</pre>
 </div>
 
 	<script type="text/javascript" src="../scripts/jquery-1.10.1.min.js"></script>
 	<script type="text/javascript" src="http://code.createjs.com/createjs-2013.05.14.min.js"></script>
-	<script type="text/javascript" src="../scripts/ndgmr.Collision.js"></script>
 	<script>
 
 		$(document).ready(function(){
-			
-			var rain, stage;
+			var stage, bmp, img;
 			stage = new createjs.Stage("easel-canvas");
+			var t = new createjs.Text("EaselJS Text Display Object", "20px Arial", "white");
+			t.x = 5;
+			t.y = 20;
+			t.textBaseline = "alphabetic";
+			img = new Image();
+			img.onload = handleImageLoad;
+			img.src = "../images/carrot.png";
 
-			var rocks = new createjs.Bitmap("images/rocks.png");
-			var rainBit = new createjs.Bitmap("images/rain.png");
+			function handleImageLoad() {
 
-			function rainDrop(){
-				var rainDrop = rainBit.clone(true);
-				rainDrop.yReset = -(Math.random() * 600);
-				rainDrop.x = (Math.random() * 800);
-				rainDrop.y = rainDrop.yReset;
-				rainDrop.speed = (Math.random() * 2) + 2;
-				return rainDrop;
+			    bmp = new createjs.Bitmap(img);
+			    bmp.x = 10;
+			    bmp.y = 50;
+			    stage.addChild(bmp);
+			    stage.update();
 			}
 
-			createjs.Ticker.addEventListener("tick", animate);
-			createjs.Ticker.setFPS(60);
-
-			rain = 50;
-
-			for(var i = 0;i < rain; i++){
-				stage.addChild(rainDrop());
-			}
-
-			stage.addChild(rocks);
-			
-			function animate(e){
-
-				for(var i = 0; i < stage.children.length; i++){
-					var e = stage.children[i];
-					var intersection = ndgmr.checkPixelCollision(rocks, e, 0.75);
-					if(intersection) e.y = e.yReset;
-
-					if(e.y > (-e.yReset + 300)){
-						e.y = e.yReset;
-					}
-					e.y += e.speed;
-				}
-				
-				rocks.y = 220;
-				stage.update();
-
-			}
+			stage.addChild(t);
+			stage.update();
 
 		});
 

@@ -7,24 +7,30 @@
 
 <h1>Canvas</h1>
 
-<canvas id="plain-canvas" width="300" height="200" style="background: cyan;">A 'no canvas' fall back sits here</canvas>
+<canvas id="plain-canvas" width="600" height="200">A 'no canvas' fall back sits here</canvas>
 
 <div class="code-snippet">
 	<ol>
-		<li>Single uninspectable DOM element - a container</li>
+		<li>Single DOM element - a container</li>
 		<li>Requires JavaScript</li>
 		<li>Contexts - getContext() - returns object with drawing methods, 3D context is called WebGL</li>
-		<li>Take advantage of the Client not server - Load the raw data from the server but generate graphics on the Client</li>
-		<li>Beware of the loaded image - <a href="https://developer.mozilla.org/en-US/docs/HTML/CORS_Enabled_Image">CORS tainted canvas</a></li>
 		<li>Bitmaps, Games, Animations, High performance operations like filters and shadows, animations</li>
 		<li>Required &lt;/canvas&gt; tag</li>
+		<li>Take advantage of the Client not server - Load the raw data from the server but generate graphics on the Client</li>
+		<li>Beware of the loaded image - <a href="https://developer.mozilla.org/en-US/docs/HTML/CORS_Enabled_Image">CORS tainted canvas</a></li>
 		<li>Why use a library?</li>
 		<li>The 3 libraries are: <a href="intro/easel.html">EaselJS, KineticJS and PaperJS</a></li>
 	</ol>
+<b>Canvas</b>
 <pre>
-<script type="text/javascript">
-canvas = $("#plain-canvas")[0];
-context = canvas.getContext("2d");
+&lt;canvas id="plain-canvas" width="600" height="200">
+	Fall back
+&lt;/canvas>
+
+&lt;script type="text/javascript">
+	canvas = $("#plain-canvas")[0];
+	context = canvas.getContext("2d");
+&lt;/script>
 </script>
 </pre>
 </div>
@@ -32,21 +38,24 @@ context = canvas.getContext("2d");
 	<script type="text/javascript">
 		$(document).ready(function(){
 			$(function() {
-			    var x = 0, y = 0, vx = 3, vy = 2, canvas, context;
-			     
-			    canvas = $("#plain-canvas")[0];
-			    context = canvas.getContext("2d");
-			    console.log(context);
-			    setInterval(draw, 1000/24);
-			     
-			    function draw() {
-			        context.clearRect(0, 0, 50, 50);
-			        context.beginPath();
-			        context.arc(x, y, 20, 0, Math.PI * 2, false);
-			        context.fill();
-			        x += vx;
-			        y += vy;
-			    }
+
+			  // get the canvas element using the DOM
+			  var canvas = document.getElementById('plain-canvas');
+			    // use getContext to use the canvas for drawing
+			    var ctx = canvas.getContext('2d');
+			    ctx.translate(100,100);
+			    for (i=1; i<7; i++){
+			       ctx.save();
+			       ctx.fillStyle = 'rgb('+(51*i)+','+(200-51*i)+',0)';
+			       for (j=0; j < i*6; j++){
+			          ctx.rotate(Math.PI*2/(i*6));
+			          ctx.beginPath();
+			          ctx.arc(0,i*12.5,5,0,Math.PI*2,true);
+			          ctx.fill();
+			       }
+			       ctx.restore();
+			     }
+
 			});
 		});
 	</script>
