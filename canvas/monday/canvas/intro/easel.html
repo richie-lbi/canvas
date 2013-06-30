@@ -11,7 +11,7 @@
 <canvas id="easel-canvas" width="600" height="400"></canvas>
 <div class="code-snippet">
 	<ol>
-		<li><a href="http://www.createjs.com/#!/EaselJS">EaselJS</a> - it's Flash for HTML5!</li>
+		<li><a href="http://www.createjs.com/#!/EaselJS">EaselJS</a> - it's Flash for HTML5! Comes as part of createJS suite</li>
 		<li>Size: 62k</li>
 		<li>Support: IE9 +</li>
 		<li>EaselJS is Javascript so supports usual stuff like Objects and Arrays etc as well as familiar syntax</li>
@@ -20,11 +20,6 @@
 		<li>DisplayObject : Abstract base class for all display elements in EaselJS. Exposes all of the display properties (ex. x, y, rotation, scaleX, scaleY, alpha, shadow, etc) that are common to all display objects.</li>
 		<li>Support of touch devices is built in</li>
 	</ol>
-	<table>
-		<tr>
-			<td>Comes as part of createJS suite</td>
-		</tr>
-	</table>
 </div>
 
 	<script type="text/javascript" src="../scripts/jquery-1.10.1.min.js"></script>
@@ -59,13 +54,13 @@ box.cache(0, 0, 100, 100);
 			    bmp.x = 10;
 			    bmp.y = 50;
 
-
-bmp.filters = [
-     new createjs.ColorFilter(0, 0, 0, 1, 255, 0, 0),
-     new createjs.BoxBlurFilter(5, 5, 10)
- ];
- bmp.cache(0,0, 100, 100);
-
+				/*
+				bmp.filters = [
+				     new createjs.ColorFilter(0, 0, 0, 1, 255, 0, 0),
+				     new createjs.BoxBlurFilter(5, 5, 10)
+				 ];
+				 bmp.cache(0,0, 100, 100);
+				*/
 
 			    stage.addChild(bmp);
 			    stage.update();
