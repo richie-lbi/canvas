@@ -24,7 +24,7 @@
 	</ol>
 </div>
 
-	<script type="text/javascript" src="scripts/jquery-1.10.1.min.js"></script>
+	<script type="text/javascript" src="../scripts/jquery-1.10.1.min.js"></script>
 	<script type="text/javascript" src="http://d3lp1msu2r81bx.cloudfront.net/kjs/js/lib/kinetic-v4.5.4.min.js"></script>
 	<script>
 		
@@ -32,8 +32,8 @@
 			
 			var stage = new Kinetic.Stage({
 				container:'kinetic-canvas',
-				width: 800,
-				height: 300
+				width: 600,
+				height: 400
 			});
 
 			var ball1 = new Kinetic.Circle({
@@ -63,13 +63,16 @@
 			var star = new Kinetic.Star({
 				x: 100,
 				y: 100,
-		        numPoints: 6,
-		        innerRadius: 10,
-		        outerRadius: 70,
+		        numPoints: 5,
+		        innerRadius: 20,
+		        outerRadius: 40,
 		        fill: '#e8e8e8',
 		        stroke: 'cyan'
 			});
-
+			star.on('mousedown', function() {
+				var mousePos = stage.getMousePosition();
+				console.log(' -- ',mousePos);
+			});
 			// tooltip
 			var tooltip = new Kinetic.Label({
 				x: 100,
@@ -100,42 +103,15 @@
 			var l = new Kinetic.Layer();
 			var l2 = new Kinetic.Layer();
 
-			l.add(star).add(textpath).add(tooltip);
-			l2.add(ball1).add(ball2);
+			l.add(star)//.add(textpath).add(tooltip);
+			//l2.add(ball1).add(ball2);
 
-			stage.add(l).add(l2);
+			stage.add(l); //.add(l2);
 			
-			var ballSpd = 2;
-			
-			var anim = new Kinetic.Animation(function(frame) {
 
-				star.rotate(star.getRotation()+0.02);
-				star.setX(star.getX() + 1);
-				textpath.setAttr('x', textpath.getAttr('x') - 1);
-
-				ball1.setAttr('y', ball1.getAttr('y') + ballSpd);
-				ball2.setAttr('y', ball2.getAttr('y') - ballSpd);
-
-			if(doObjectsCollide(ball1,ball2)){ console.log('collide', ((ball1.getY() + ball1.getHeight()) < (ball2.getY())));
-				
-				if(ball1.getY() > 300 - (ball1.getRadius() / 2) || ball1.getY() < (ball1.getRadius() / 2)){
-					ballSpd = -ballSpd;
-				}
-
-			}, [l, l2]);
-
-			anim.start();
 
 		});
 		
-		function doObjectsCollide(a, b) { 
-		   return !(
-			((a.getY() + a.getHeight()) < (b.getY())) ||
-			(a.getY() > (b.y + b.getHeight())) ||
-			((a.getX() + a.getWidth()) < b.getX()) ||
-			(a.getX() > (b.getX() + b.getWidth()))
-		   );
-		}
 
 	</script>
 </body>

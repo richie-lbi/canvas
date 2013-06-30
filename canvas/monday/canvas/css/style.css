@@ -2,10 +2,22 @@ body{
 	font-family: Helvetica;
 }
 
-canvas, #kinetic-canvas{
+canvas, svg, #kinetic-canvas{
 	background: black;
 	float: left;
 	color: white;
+}
+
+svg{
+	background: none;
+}
+
+.kiwi{
+	fill: #f1001c;
+}
+
+.ground {
+  fill: #787f6a;
 }
 
 .code-snippet{

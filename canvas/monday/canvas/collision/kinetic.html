@@ -17,16 +17,19 @@
 
 	<ol>
 		<li>Using console during heavy animation session, severely hampers performance of the browser<li>
+		<li>Collisions are dodgy - they have a getIntersections() as a method of the stage object, but even kinetics own docs warn that it's rubbish. Forums etc recommend normal boundary detection but it's not an exact science</li>
 	</ol>
-
-	<h2>Resources</h2>
-	<ul>
-		<li>Docs - http://kineticjs.com/docs/Kinetic.Stage.html</li>
-		<li>How it works: 
-			<a href="https://github.com/ericdrowell/KineticJS/wiki">https://github.com/ericdrowell/KineticJS/wiki</a>
-		</li>
-		<li>Collisions are dodgy - they have a getIntersections() as a method of the stage object, but even kinetics own docs warn that it's rubbish</li>
-	</ul>
+<pre>
+function doObjectsCollide(a, b) { 
+   return !(
+	((a.getY() + a.getHeight()) < (b.getY())) ||
+	(a.getY() > (b.y + b.getHeight())) ||
+	((a.getX() + a.getWidth()) < b.getX()) ||
+	(a.getX() > (b.getX() + b.getWidth()))
+   );
+}
+</pre>
+</div>
 
 	<script type="text/javascript" src="../scripts/jquery-1.10.1.min.js"></script>
 	<script type="text/javascript" src="http://d3lp1msu2r81bx.cloudfront.net/kjs/js/lib/kinetic-v4.5.4.min.js"></script>
