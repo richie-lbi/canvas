@@ -1,0 +1,140 @@
+<html>
+<head>
+	<style>
+		div#kinetic-canvas{
+			width: 600px;
+			height: 400px;
+		}
+	</style>
+	<link rel="stylesheet" type="text/css" href="../css/style.css"></link>
+</head>
+<body id="kineticJS">
+
+<h1>KineticJS > Summary</h1>
+<div id="kinetic-canvas"></div>
+
+<div class="code-snippet">
+
+	<ol>
+		<li>Robust - great performance, http://www.html5canvastutorials.com/labs/html5-canvas-kineticjs-drag-and-drop-stress-test-with-1000-shapes/<li>
+	</ol>
+<pre>
+function doObjectsCollide(a, b) { 
+   return !(
+	((a.getY() + a.getHeight()) < (b.getY())) ||
+	(a.getY() > (b.y + b.getHeight())) ||
+	((a.getX() + a.getWidth()) < b.getX()) ||
+	(a.getX() > (b.getX() + b.getWidth()))
+   );
+}
+</pre>
+</div>
+
+	<script type="text/javascript" src="../scripts/jquery-1.10.1.min.js"></script>
+	<script type="text/javascript" src="http://d3lp1msu2r81bx.cloudfront.net/kjs/js/lib/kinetic-v4.5.4.min.js"></script>
+	<script>
+		
+		$(document).ready(function(){
+			
+			var rain, bitmapBackgroundLayer, stage;
+
+			stage = new Kinetic.Stage({
+				container:'kinetic-canvas',
+				width: 800,
+				height: 300
+			});
+
+			function rainDrop(xPos, colour){
+				var _y = -(Math.random() * 600);
+				var rainDrop = new Kinetic.Circle({
+					radius: 10,
+					x: xPos,
+					fill: colour,
+					speed: (Math.random() * 2) + 2,
+					yReset: _y,
+					y: _y
+				});
+				return rainDrop;
+			}
+
+			rain = 50;
+			bitmapBackgroundLayer = new Kinetic.Layer();
+			noBitmapLayer = new Kinetic.Layer();
+
+			for(var i = 0;i < rain; i++){
+				bitmapBackgroundLayer.add(rainDrop(((Math.random() * 400) + 400),'blue'));
+				noBitmapLayer.add(rainDrop(((Math.random() * 400)),'cyan'));
+			}		
+
+			stage.add(bitmapBackgroundLayer).add(noBitmapLayer);
+
+			var imageObj = new Image();
+			imageObj.onload = function() {
+				var rocks = new Kinetic.Image({
+				  x: 400,
+				  y: 220,
+				  image: imageObj
+				});
+
+				// add the shape to the bitmapBackgroundLayer
+				bitmapBackgroundLayer.add(rocks);
+
+			};
+
+			imageObj.src = 'images/rocks.png';
+			
+			var rocksNoBitmap = new Kinetic.Rect({
+                x: 50,
+                y: 250,
+                height: 50,
+                width: 300,
+                fill: "black",
+                stroke: "white",
+                strokeWidth: 2
+      		});
+			
+			noBitmapLayer.add(rocksNoBitmap);
+
+			var anim = new Kinetic.Animation(function(frame) {
+				update(bitmapBackgroundLayer);
+				update(noBitmapLayer);
+				
+			}, [bitmapBackgroundLayer, noBitmapLayer]);
+
+			anim.start();
+
+			function update(layer) {
+
+				var rainDrop = layer.getChildren();
+
+				for(var n = 0; n < rainDrop.length-1; n++) {
+					var rain = rainDrop[n];
+
+					if(rain.getAttr('y') > (-rain.getAttr('yReset') + 300)){
+					rain.setY(rain.getAttr('yReset'));
+					}
+
+					rain.setY(rain.getAttr('y') + 2);
+
+					if(doObjectsCollide(rain, rainDrop[rainDrop.length-1])){
+						rain.setY(rain.getAttr('yReset'));
+					};
+				  
+				}
+
+			}
+			
+			function doObjectsCollide(a, b) { 
+			   return !(
+				((a.getY() + a.getHeight()) < (b.getY())) ||
+				(a.getY() > (b.y + b.getHeight())) ||
+				((a.getX() + a.getWidth()) < b.getX()) ||
+				(a.getX() > (b.getX() + b.getWidth()))
+			   );
+			}
+
+		});
+
+	</script>
+</body>
+</html>

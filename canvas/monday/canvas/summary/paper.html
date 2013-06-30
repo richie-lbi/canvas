@@ -1,0 +1,119 @@
+<html>
+<head>
+	<style>
+		canvas{
+			background: black;
+		}
+	</style>
+	<link rel="stylesheet" type="text/css" href="../css/style.css"></link>
+</head>
+<body id="paperJS">
+
+<h1>PaperJS > Summary</h1>
+
+<canvas id="paper-canvas" width="600" height="400"></canvas>
+<div class="code-snippet">
+	<ol>
+		<li>Has own DOM model - often called a 'scene graph'. A node based way of working with its elements</li>
+		<li>Ability to add points and vectors together</li>
+	</ol>
+</div>
+
+	<script type="text/javascript" src="../scripts/jquery-1.10.1.min.js"></script>
+	<script type="text/javascript" src="../scripts/paper-min.js"></script>
+	<script type="text/paperscript" canvas="paper-canvas">
+
+		var sWid = 600,
+			sHei = 400,
+			queryStr = null;
+
+		function getParameterByName() {
+		    var vars = [], hash;
+		    var hashes = window.location.href.slice(window.location.href.indexOf('?') + 1).split('&');
+		    for(var i = 0; i < hashes.length; i++)
+		    {
+		        hash = hashes[i].split('=');
+		        vars.push(hash[0]);
+		        vars[hash[0]] = hash[1];
+		    }
+		    return vars;
+		}
+
+		function onFrame(event) {
+
+			for (var i = 0; i < project.activeLayer.children.length; i++) {
+				
+				var circ = project.activeLayer.children[i];
+				if(circ.position.x > (sWid - circ.size) || circ.position.x < (0 + circ.size)){
+					circ.speedX = -circ.speedX;
+				}
+
+				if(circ.position.y > (sHei - circ.size) || circ.position.y < (0 + circ.size)){
+					circ.speedY = -circ.speedY;
+				}
+				
+				circ.position.x += circ.speedX;
+				circ.position.y += circ.speedY;
+
+			}
+
+		}
+
+
+		var circle = {
+
+			me: null,
+			size: (Math.random(6) * 6) + 4,
+			limit: this.size / 5,
+			sWidth: sWid,
+			sHeight: sHei,
+		
+			init: function(){
+
+				var direction = (Math.round(Math.random(1)) === 0)? false : true ;
+				var driver = Math.round(10 * Math.random(10));
+				var speed = (Math.random(5) * driver) + 1;
+				var size = (driver * 1.2) + 1;
+				if(direction) speed = -speed;
+
+				var circ = new Path.Circle([((Math.random(sWid) * (sWid - 30)) + 15),((Math.random(sHei) * (sHei - 30)) + 15)], size);
+				circ.fillColor = 'white';
+				circ.speedX = speed;	
+				circ.speedY = speed;
+				circ.size = size;		
+				return circ;
+			}
+
+		}
+
+		var demo = {
+		
+			canvas: null,
+			queryStr: getParameterByName(),
+			ballCount: 10,
+			
+			init: function(){
+
+				if(this.queryStr.hasOwnProperty('ball')) this.ballCount = this.queryStr.ball;
+
+				for(var i = 0;i< demo.ballCount;i++){
+					demo.create();
+				}
+
+			},
+			
+			create: function(){
+				var shape = new circle.init();
+			}
+			
+		}
+
+		$(document).ready(function(){
+
+			demo.init();
+
+		});
+
+	</script>
+</body>
+</html>
