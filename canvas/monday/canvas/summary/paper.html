@@ -17,8 +17,10 @@
 		<li>Has own DOM model - often called a 'scene graph'. A node based way of working with its elements</li>
 		<li>Ability to add points and vectors together</li>
 		<li>Initially 'feels' different to the others but ultimately feels most intuitive after spending some time</li>
-		<li>Drawing curves, arcs and beiziers</li>
+		<li>Drawing curves, arcs and beiziers was still a massive hassle</li>
 		<li>New features added regularly to library</li>
+		<li>keepalive="true": To conserve battery power and cpu usage, Paper.js normally stops all animation events when the window is not focused</li>
+		<li><a href="http://paperjs.org/tutorials/paths/smoothing-simplifying-flattening/#simplifying-paths">Simplify path</a></li>
 	</ol>
 </div>
 
@@ -42,6 +44,25 @@
 		    return vars;
 		}
 
+
+		var amount = 8;
+		var height = 100;
+		// Create a new path and style it:
+		var richard = new Path({
+		    // 80% black:
+		    strokeColor: [0.8],
+		    strokeWidth: 10,
+		    strokeCap: 'square'
+		});
+
+		// Add 5 segment points to the path spread out
+		// over the width of the view:
+		for (var i = 0; i <= amount; i++) {
+		    richard.add(new Point(i / amount, 1) * view.size);
+		}
+		// richard.smooth();
+		console.log(richard);
+
 		function onFrame(event) {
 
 			for (var i = 0; i < project.activeLayer.children.length; i++) {
@@ -59,6 +80,16 @@
 				circ.position.y += circ.speedY;
 
 			}
+			console.log(richard);
+		    for (var i = 0; i <= amount; i++) {
+		        var segment = richard.segments[i];
+
+		        // A cylic value between -1 and 1
+		        var sinus = Math.sin(event.time * 2 + (i * 3));
+		        
+		        // Change the y position of the segment point:
+		        segment.point.y = sinus * height + 100;
+		    }
 
 		}
 

@@ -34,6 +34,10 @@ stage.update();
 
 			var stage = new createjs.Stage("easel-canvas");
 			var lbi = new createjs.Container();
+			lbi.x = 235;
+			lbi.y = 180;
+			lbi.regX = 50;
+			lbi.regY = 22;
 
 			var l = new createjs.Shape();
 			l.graphics.f("#f1001c").mt(0, 0).lt(11,0).lt(11,35).lt(30,35).lt(30,44).lt(0,44);
@@ -49,10 +53,10 @@ stage.update();
 			b1.graphics.f("#f1001c").mt(0, 0).lt(22,0).bt( 28,  0,  32,  6,  32,  8 ).lt(32,13).bt( 32,  8,  32,  19,  28,  20 ).bt( 33,20,35,23, 35,28).bt(35,39,31,43,21,44).lt(0,44);
 
 			var b2 = new createjs.Shape();
-			b2.graphics.f("white").mt(11, 8).lt(17,8).bt( 21,  8,  21,  18,  17,  18).lt(11,18); 
+			b2.graphics.f("black").mt(11, 8).lt(17,8).bt( 21,  8,  21,  18,  17,  18).lt(11,18); 
 
 			var b3 = new createjs.Shape();
-			b3.graphics.f("white").mt(11, 25).lt(20,25).bt( 25,  25,  24,  35,  19,  35).lt(11,35); 
+			b3.graphics.f("black").mt(11, 25).lt(20,25).bt( 25,  25,  24,  35,  19,  35).lt(11,35); 
 
 			b.addChild(b1,b2,b3);
 
@@ -74,9 +78,17 @@ stage.update();
 
 			createjs.Ticker.addEventListener("tick", animate);
 
+
+			var al = -0.05;
 			function animate(){
 				stage.update();
 				l.rotation += 3;
+				i.alpha += al;
+				lbi.scaleX += (al / 2);
+				lbi.scaleY += (al / 2);
+				if(i.alpha < 0.10 || i.alpha > 1){
+					al = -al;
+				}
 			}
 
 		});

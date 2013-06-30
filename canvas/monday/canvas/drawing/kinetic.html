@@ -113,7 +113,7 @@ stage.add(lbi);
           context.closePath();
           canvas.fillStroke(this);
         },
-        fill: 'white'
+        fill: 'black'
       });
 
       var b3 = new Kinetic.Shape({
@@ -127,7 +127,7 @@ stage.add(lbi);
           context.closePath();
           canvas.fillStroke(this);
         },
-        fill: 'white'
+        fill: 'black'
       });
 
       var i1 = new Kinetic.Shape({
@@ -168,118 +168,6 @@ stage.add(lbi);
       lbi.add(l).add(i).add(b);
 
       stage.add(lbi);
-
-		/*
-		$(document).ready(function(){
-			
-			var stage = new Kinetic.Stage({
-				container:'kinetic-canvas',
-				width: 800,
-				height: 300
-			});
-
-			var ball1 = new Kinetic.Circle({
-				radius: 20,
-				x: 400,
-				y: 50,
-				fill: 'red'
-			});
-
-			var ball2 = new Kinetic.Circle({
-				radius: 20,
-				x: 400,
-				y: 250,
-				fill: 'cyan'
-			});
-				
-			var textpath = new Kinetic.TextPath({
-			  x: 100,
-			  y: 50,
-			  fill: '#333',
-			  fontSize: '24',
-			  fontFamily: 'Arial',
-			  text: 'All the world\'s a stage, and all the men and women merely players.',
-			  data: 'M10,10 C0,0 10,150 100,100 S300,150 400,50'
-			});
-
-			var star = new Kinetic.Star({
-				x: 100,
-				y: 100,
-		        numPoints: 6,
-		        innerRadius: 10,
-		        outerRadius: 70,
-		        fill: '#e8e8e8',
-		        stroke: 'cyan'
-			});
-
-			// tooltip
-			var tooltip = new Kinetic.Label({
-				x: 100,
-				y: 55,
-				opacity: 0.75
-			});
-
-			tooltip.add(new Kinetic.Tag({
-				fill: 'black',
-				pointerDirection: 'down',
-				pointerWidth: 10,
-				pointerHeight: 10,
-				lineJoin: 'round',
-				shadowColor: 'black',
-				shadowBlur: 10,
-				shadowOffset: 10,
-				shadowOpacity: 0.5
-			}));
-
-			tooltip.add(new Kinetic.Text({
-				text: 'KinnticJS Uses Labels',
-				fontFamily: 'Calibri',
-				fontSize: 18,
-				padding: 5,
-				fill: 'white'
-			}));
-
-			var l = new Kinetic.Layer();
-			var l2 = new Kinetic.Layer();
-
-			l.add(star).add(textpath).add(tooltip);
-			l2.add(ball1).add(ball2);
-
-			stage.add(l).add(l2);
-			
-			var ballSpd = 2;
-			
-			var anim = new Kinetic.Animation(function(frame) {
-
-				star.rotate(star.getRotation()+0.02);
-				star.setX(star.getX() + 1);
-				textpath.setAttr('x', textpath.getAttr('x') - 1);
-
-				ball1.setAttr('y', ball1.getAttr('y') + ballSpd);
-				ball2.setAttr('y', ball2.getAttr('y') - ballSpd);
-
-			if(doObjectsCollide(ball1,ball2)){ console.log('collide', ((ball1.getY() + ball1.getHeight()) < (ball2.getY())));
-				
-				if(ball1.getY() > 300 - (ball1.getRadius() / 2) || ball1.getY() < (ball1.getRadius() / 2)){
-					ballSpd = -ballSpd;
-				}
-
-			}, [l, l2]);
-
-			anim.start();
-
-		});
-		
-		function doObjectsCollide(a, b) { 
-		   return !(
-			((a.getY() + a.getHeight()) < (b.getY())) ||
-			(a.getY() > (b.y + b.getHeight())) ||
-			((a.getX() + a.getWidth()) < b.getX()) ||
-			(a.getX() > (b.getX() + b.getWidth()))
-		   );
-		}
-
-		*/
 
 	</script>
 </body>

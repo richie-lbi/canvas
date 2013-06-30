@@ -27,6 +27,11 @@ var l = new Path({
 l.fillColor = '#f1001c';
 </pre>
 
+<b>Points</b>
+<pre>
+lbi.position = new Point(280,185);
+</pre>
+
 <b>Vectors</b>
 <pre>
 var vector = new Point({
@@ -68,27 +73,19 @@ var vector = new Point({
 			var b2 = new Path({
 			    segments: [[11,8], [17,8], [17,18],[11,18]],
 			});
-			b2.fillColor = 'white';
+			b2.fillColor = 'black';
 			b2.position = new Point(60,35);
 
 			var b3 = new Path({
 			    segments: [[11,25], [20,25], [19,35],[11,35]],
 			});
-			b3.fillColor = 'white';
+			b3.fillColor = 'black';
 			b3.position = new Point(60,49);
 
 			var b = new Group({
 			    children: [b1, b2, b3]
 			});
-			// b.position = new Point(44,16);
-
-/*
-			var b2 = new createjs.Shape();
-			b2.graphics.f("white").mt(11, 8).lt(17,8).bt( 21,  8,  21,  18,  17,  18).lt(11,18); 
-
-			var b3 = new createjs.Shape();
-			b3.graphics.f("white").mt(11, 25).lt(20,25).bt( 25,  25,  24,  35,  19,  35).lt(11,35); 
-*/
+			b.position = new Point(56,22);
 
 			var i1 = new Path({
 			    segments: [[0,0], [12,0], [12,11],[7,11],[7,4],[0,4]],
@@ -103,13 +100,30 @@ var vector = new Point({
 			var i = new Group({
 			    children: [i1, i2]
 			});
-			i.position = new Point(100,22);
+			i.position = new Point(90,22);
 
-// mt(0, 0).lt(22,0).bt( 28,  0,  32,  6,  32,  8 ).lt(32,13).bt( 32,  8,  32,  19,  28,  20 ).bt( 33,20,35,23, 35,28).bt(35,39,31,43,21,44).lt(0,44);
+			var lbi = new Group({
+			    children: [l, b, i]
+			});
 
+			lbi.position = new Point(280,185);
 
-/**/
-
+			var y = view.size.height / 2;
+			var width = view.size.width;
+			var vector = new Point({
+			    angle: 45,
+			    length: width / 5
+			});
+			var offset = width / 30;
+			var handleTexts = [];
+			var path = new Path();
+			path.segments = [
+			    [[offset, y], null, vector.rotate(-90)],
+			    [[width / 2, y], vector.rotate(-180), vector],
+			    [[width - offset, y], vector.rotate(90), null]
+			];
+			path.fullySelected = true;
+			path.position = new Point(300,300);
 
 	</script>
 </body>
