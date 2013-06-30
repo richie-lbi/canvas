@@ -11,11 +11,22 @@
 
 <div class="code-snippet">
 	<ol>
-		<li>Required &lt;/canvas&gt; tag</li>
+		<li>Single uninspectable DOM element - a container</li>
+		<li>Requires JavaScript</li>
+		<li>Contexts - getContext() - returns object with drawing methods, 3D context is called WebGL</li>
 		<li>Take advantage of the Client not server - Load the raw data from the server but generate graphics on the Client</li>
 		<li>Beware of the loaded image - <a href="https://developer.mozilla.org/en-US/docs/HTML/CORS_Enabled_Image">CORS tainted canvas</a></li>
+		<li>Bitmaps, Games, Animations, High performance operations like filters and shadows, animations</li>
+		<li>Required &lt;/canvas&gt; tag</li>
+		<li>Why use a library?</li>
+		<li>The 3 libraries are: <a href="intro/easel.html">EaselJS, KineticJS and PaperJS</a></li>
 	</ol>
-
+<pre>
+<script type="text/javascript">
+canvas = $("#plain-canvas")[0];
+context = canvas.getContext("2d");
+</script>
+</pre>
 </div>
 	<script type="text/javascript" src="scripts/jquery-1.10.1.min.js"></script>
 	<script type="text/javascript">
